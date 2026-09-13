@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
 import { OperationalDrilldown, type MetricView } from "./OperationalDrilldown";
 import { PatientCrm } from "./PatientCrm";
 import { CrmProvider } from "@/lib/crm-store";
-import { useOps } from "@/lib/lantern-ops";
+import { useOps, useClinicalQueue } from "@/lib/lantern-ops";
 
 type View = "network"|"queue"|"crm"|"patient"|"alert"|"handover"|"patientapp"|"observation"|"scenarios"|"governance"|"users"|"emergency"|"admission"|MetricView;
 
