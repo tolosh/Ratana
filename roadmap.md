@@ -31,3 +31,4 @@
 - [ ] Validate keyboard, desktop, and mobile card drill-downs
 - [x] Clinical CRM patient model with full create, read, update and delete across identity, episodes, clinical detail, monitoring, care plan, notes, tasks, contacts, care team, communications, documents and audit
 - [x] Validate the CRM on desktop and mobile
+- [x] Dashboard and drill-down figures read live from the record set (72 pending admissions, 21 transfers, 425 device concerns now exist as records; worklists paginate and totals reconcile).
