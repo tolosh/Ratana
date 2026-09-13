@@ -22,10 +22,10 @@ import {
 import { Button } from "@/components/ui/button";
 
 const layers = [
-  { icon: Radio, number: "01", title: "Connect", copy: "Bring together observations, symptoms, device status, pathway schedules, staff actions and hospital context.", items: ["Patient and caregiver app", "Connected and manual observations", "Hospital and staff workflow events"] },
-  { icon: Activity, number: "02", title: "Understand", copy: "Turn raw events into a live patient state with trends, freshness, pathway context and visible reasons.", items: ["Patient state and baseline", "Trend and deterioration priority", "Missing-data and device-quality risk"] },
-  { icon: ClipboardList, number: "03", title: "Coordinate", copy: "Route accountable work to clinical, operational, home-visiting, device and escalation teams.", items: ["Prioritised clinical queues", "Named owner and due time", "Escalation, handover and discharge"] },
-  { icon: ShieldCheck, number: "04", title: "Govern", copy: "Make important access, state changes, decisions, overrides and handovers attributable and reviewable.", items: ["Role and care-context access", "Policy and pathway versions", "Complete action history"] },
+  { icon: Radio, number: "01", title: "Connect", copy: "Bring together observations, symptoms, device status, pathway schedules, staff actions and hospital context.", items: ["Patient and caregiver app", "Connected and manual observations", "Hospital and staff workflow events"], how: "Secure app entry, device and vendor events, staff capture, and FHIR-shaped interfaces bring data into one event stream. Every event keeps its patient, source, timestamp, quality and episode context.", input: "Vitals · symptoms · device state · tasks · hospital context", output: "Validated, attributable events" },
+  { icon: Activity, number: "02", title: "Understand", copy: "Turn raw events into a live patient state with trends, freshness, pathway context and visible reasons.", items: ["Patient state and baseline", "Trend and deterioration priority", "Missing-data and device-quality risk"], how: "The state engine compares each event with the patient's baseline, recent trend, pathway rules, expected schedule and device quality. It separates physiological concern from stale, missing or unreliable data.", input: "Validated events · baseline · pathway rules · prior state", output: "Current state, priority and reasons" },
+  { icon: ClipboardList, number: "03", title: "Coordinate", copy: "Route accountable work to clinical, operational, home-visiting, device and escalation teams.", items: ["Prioritised clinical queues", "Named owner and due time", "Escalation, handover and discharge"], how: "Workflow rules turn patient state into a specific action, destination queue and response time. Work carries an owner, due time, acknowledgement, escalation path and disposition until a clinician records the outcome.", input: "State · urgency · pathway · team coverage · open work", output: "Owned task, timer and escalation path" },
+  { icon: ShieldCheck, number: "04", title: "Govern", copy: "Make important access, state changes, decisions, overrides and handovers attributable and reviewable.", items: ["Role and care-context access", "Policy and pathway versions", "Complete action history"], how: "Identity, role, organisation, region, team and patient relationship determine access. The platform records sensitive reads, state changes, score versions, acknowledgements, decisions, overrides, handovers and exports.", input: "Identity · role · care context · policy · action history", output: "Controlled access and reviewable evidence" },
 ];
 
 const flow = [
@@ -102,6 +102,25 @@ export function TechnologyPage() {
             <SectionHead eyebrow="Architecture" title="Four layers, one operating picture." copy="The platform does not simply collect remote-monitoring data. It turns events from the home and hospital into prioritised, explainable and accountable clinical work." />
             <div className="mt-10 grid border-l border-t border-border lg:grid-cols-4">
               {layers.map(({ icon: Icon, number, title, copy, items }) => <article key={title} className="border-b border-r border-border bg-card p-5"><div className="flex items-center justify-between"><Icon className="size-6 text-primary" /><span className="font-mono text-sm text-primary">{number}</span></div><h3 className="mt-8 font-display text-2xl font-semibold text-night">{title}</h3><p className="mt-3 min-h-24 text-sm leading-6 text-muted-foreground">{copy}</p><ul className="mt-5 space-y-3 border-t border-border pt-4">{items.map(item => <li key={item} className="flex gap-2 text-sm leading-5"><CheckCircle2 className="mt-0.5 size-4 shrink-0 text-primary" />{item}</li>)}</ul></article>)}
+            </div>
+          </div>
+        </section>
+
+        <section className="border-b border-border bg-card py-16 lg:py-24">
+          <div className="mx-auto max-w-7xl px-5 lg:px-8">
+            <SectionHead eyebrow="Inside each layer" title="How the operating picture is built." copy="Each layer has a distinct job, a defined input and a useful output. Together they turn distributed events into controlled clinical operations." />
+            <div className="mt-10 divide-y divide-border border-y border-border">
+              {layers.map(({ icon: Icon, number, title, how, input, output }) => (
+                <article key={title} className="grid gap-6 py-8 lg:grid-cols-[64px_180px_1fr_260px] lg:items-start">
+                  <div className="flex size-12 items-center justify-center border border-primary bg-harbour-soft text-primary"><Icon className="size-6" /></div>
+                  <div><p className="font-mono text-xs text-primary">LAYER {number}</p><h3 className="mt-2 font-display text-3xl font-semibold text-night">{title}</h3></div>
+                  <p className="text-base leading-7 text-foreground/90">{how}</p>
+                  <dl className="grid gap-px bg-border border border-border">
+                    <div className="bg-background p-3"><dt className="font-mono text-[10px] uppercase text-muted-foreground">Takes in</dt><dd className="mt-1 text-xs font-medium leading-5">{input}</dd></div>
+                    <div className="bg-background p-3"><dt className="font-mono text-[10px] uppercase text-muted-foreground">Produces</dt><dd className="mt-1 text-xs font-medium leading-5">{output}</dd></div>
+                  </dl>
+                </article>
+              ))}
             </div>
           </div>
         </section>
