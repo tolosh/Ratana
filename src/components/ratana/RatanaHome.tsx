@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
+import { submitEnquiry } from "@/lib/contact.functions";
 import {
   Activity,
   Ambulance,
@@ -76,6 +77,29 @@ function DemoButton({ className = "" }: { className?: string }) {
 export function RatanaHome() {
   const [menuOpen, setMenuOpen] = useState(false);
   const closeMenu = () => setMenuOpen(false);
+  const [form, setForm] = useState({ name: "", organisation: "", email: "", message: "" });
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
+
+  const updateField = (field: keyof typeof form) => (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+    setForm((current) => ({ ...current, [field]: event.target.value }));
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (sending) return;
+    setSending(true);
+    try {
+      await submitEnquiry({ data: form });
+      setSent(true);
+      setForm({ name: "", organisation: "", email: "", message: "" });
+      toast.success("Thanks — your enquiry has been received. We'll be in touch shortly.");
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Your enquiry could not be sent. Please try again.");
+    } finally {
+      setSending(false);
+    }
+  };
+
 
   return (
     <div className="min-h-screen bg-background text-foreground">
