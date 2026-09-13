@@ -79,7 +79,7 @@ export function RatanaHome() {
   const closeMenu = () => setMenuOpen(false);
   const [form, setForm] = useState({ name: "", organisation: "", email: "", message: "" });
   const [sending, setSending] = useState(false);
-  const [sent, setSent] = useState(false);
+  const [sent, setSent] = useState(() => typeof window !== "undefined" && window.sessionStorage.getItem("ratana_enquiry_sent") === "1");
 
   const updateField = (field: keyof typeof form) => (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setForm((current) => ({ ...current, [field]: event.target.value }));
@@ -92,6 +92,7 @@ export function RatanaHome() {
       await submitEnquiry({ data: form });
       setSent(true);
       setForm({ name: "", organisation: "", email: "", message: "" });
+      if (typeof window !== "undefined") window.sessionStorage.setItem("ratana_enquiry_sent", "1");
       toast.success("Thanks — your enquiry has been received. We'll be in touch shortly.");
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "Your enquiry could not be sent. Please try again.");
@@ -211,27 +212,42 @@ export function RatanaHome() {
               <h2 className="mt-3 font-display text-4xl font-semibold leading-tight text-night">Talk to us about Hospital in the Home.</h2>
               <p className="mt-5 max-w-xl text-base leading-7 text-muted-foreground">Whether you're planning a new program or scaling an existing one, tell us a little about your service and we'll be in touch.</p>
             </div>
-            <form onSubmit={handleSubmit} className="grid gap-5 border border-border bg-card p-6 sm:p-8" noValidate={false}>
-              <div className="grid gap-2">
-                <Label htmlFor="contact-name">Name</Label>
-                <Input id="contact-name" required maxLength={100} autoComplete="name" value={form.name} onChange={updateField("name")} />
+            {sent ? (
+              <div className="flex flex-col items-start gap-4 border border-border bg-card p-6 sm:p-8">
+                <div className="flex size-12 items-center justify-center rounded-full bg-stable-soft text-stable">
+                  <UserRoundCheck className="size-6" />
+                </div>
+                <h3 className="font-display text-2xl font-semibold text-night">Thank you — your enquiry has been received.</h3>
+                <p className="text-base leading-7 text-muted-foreground">
+                  We'll review your message and get back to you shortly. You won't be able to submit another enquiry from this session.
+                </p>
+                <Button asChild variant="outline" size="lg" className="mt-2 w-full sm:w-auto">
+                  <Link to="/demo">Explore the demo</Link>
+                </Button>
               </div>
-              <div className="grid gap-2">
-                <Label htmlFor="contact-organisation">Organisation <span className="text-muted-foreground">(optional)</span></Label>
-                <Input id="contact-organisation" maxLength={150} autoComplete="organization" value={form.organisation} onChange={updateField("organisation")} />
-              </div>
-              <div className="grid gap-2">
-                <Label htmlFor="contact-email">Email</Label>
-                <Input id="contact-email" type="email" required maxLength={255} autoComplete="email" value={form.email} onChange={updateField("email")} />
-              </div>
-              <div className="grid gap-2">
-                <Label htmlFor="contact-message">Message</Label>
-                <Textarea id="contact-message" required maxLength={2000} rows={5} value={form.message} onChange={updateField("message")} />
-              </div>
-              <Button type="submit" size="lg" disabled={sending} className="w-full sm:w-auto">
-                {sending ? "Sending…" : sent ? "Send another enquiry" : "Send enquiry"}
-              </Button>
-            </form>
+            ) : (
+              <form onSubmit={handleSubmit} className="grid gap-5 border border-border bg-card p-6 sm:p-8" noValidate={false}>
+                <div className="grid gap-2">
+                  <Label htmlFor="contact-name">Name</Label>
+                  <Input id="contact-name" required maxLength={100} autoComplete="name" value={form.name} onChange={updateField("name")} />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="contact-organisation">Organisation <span className="text-muted-foreground">(optional)</span></Label>
+                  <Input id="contact-organisation" maxLength={150} autoComplete="organization" value={form.organisation} onChange={updateField("organisation")} />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="contact-email">Email</Label>
+                  <Input id="contact-email" type="email" required maxLength={255} autoComplete="email" value={form.email} onChange={updateField("email")} />
+                </div>
+                <div className="grid gap-2">
+                  <Label htmlFor="contact-message">Message</Label>
+                  <Textarea id="contact-message" required maxLength={2000} rows={5} value={form.message} onChange={updateField("message")} />
+                </div>
+                <Button type="submit" size="lg" disabled={sending} className="w-full sm:w-auto">
+                  {sending ? "Sending…" : "Send enquiry"}
+                </Button>
+              </form>
+            )}
           </div>
         </section>
       </main>
