@@ -115,7 +115,7 @@ export function RatanaHome() {
               <DemoButton className="w-full sm:w-auto" />
               <Button asChild variant="outline" size="lg" className="w-full sm:w-auto"><a href="#how-it-works">See how it works</a></Button>
             </div>
-            <p className="mx-auto mt-5 max-w-2xl text-sm font-medium text-primary">Live demonstration with 5,000 active monitored patients, verified across desktop and mobile journeys.</p>
+            
             <div className="relative mx-auto mt-10 max-w-6xl border-x border-t border-border bg-muted p-2 sm:p-3">
               <div className="flex h-8 items-center gap-2 border-b border-border bg-card px-3" aria-hidden="true"><span className="size-2 rounded-full bg-rapid" /><span className="size-2 rounded-full bg-review" /><span className="size-2 rounded-full bg-stable" /><span className="ml-2 font-mono text-[10px] text-muted-foreground">NETWORK COMMAND</span></div>
               <img src={dashboardImage} alt="Rātana Network Command showing 5,000 active monitored patients and 100% virtual-bed occupancy" className="block h-auto w-full border border-border" />
