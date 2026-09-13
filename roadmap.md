@@ -14,3 +14,5 @@
 - [x] Move synthetic MVP to /demo and verify all calls to action
 - [x] Validate desktop/mobile home page
 - [ ] Publish the verified Rātana release
+- [ ] Remove all visible synthetic-data descriptions across the Rātana UI
+- [ ] Revalidate and republish after terminology removal
