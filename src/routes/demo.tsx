@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { RatanaApp } from "@/components/lantern/LanternApp";
+import { RatanaApp } from "@/components/lantern/RatanaApp";
 
 export const Route = createFileRoute("/demo")({
   head: () => ({

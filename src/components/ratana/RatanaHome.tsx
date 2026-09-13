@@ -7,7 +7,6 @@ import {
   ClipboardCheck,
   Database,
   FileCheck2,
-  HeartPulse,
   Menu,
   Network,
   ShieldCheck,
