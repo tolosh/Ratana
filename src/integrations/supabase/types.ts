@@ -121,11 +121,18 @@ export type Database = {
       }
       lantern_patients: {
         Row: {
+          admission_stage: string | null
           age: number
           created_at: string
           device_concern: boolean
+          device_data_age_minutes: number | null
+          device_issue: string | null
+          device_next_action: string | null
+          device_owner: string | null
+          device_type: string | null
           diagnosis: string
           discharge_ready: boolean
+          episode_state: string
           heart_rate: number | null
           id: string
           last_observation: string
@@ -134,6 +141,7 @@ export type Database = {
           pathway: string
           pronouns: string
           reason: string
+          referred_at: string | null
           region: string
           respiratory_rate: number | null
           score: number
@@ -142,15 +150,25 @@ export type Database = {
           systolic_bp: number | null
           team: string
           temperature: number | null
+          transfer_destination: string | null
+          transfer_eta: string | null
           transfer_in_progress: boolean
+          transfer_stage: string | null
           updated_at: string
         }
         Insert: {
+          admission_stage?: string | null
           age: number
           created_at?: string
           device_concern?: boolean
+          device_data_age_minutes?: number | null
+          device_issue?: string | null
+          device_next_action?: string | null
+          device_owner?: string | null
+          device_type?: string | null
           diagnosis: string
           discharge_ready?: boolean
+          episode_state?: string
           heart_rate?: number | null
           id: string
           last_observation: string
@@ -159,6 +177,7 @@ export type Database = {
           pathway: string
           pronouns: string
           reason: string
+          referred_at?: string | null
           region: string
           respiratory_rate?: number | null
           score: number
@@ -167,15 +186,25 @@ export type Database = {
           systolic_bp?: number | null
           team: string
           temperature?: number | null
+          transfer_destination?: string | null
+          transfer_eta?: string | null
           transfer_in_progress?: boolean
+          transfer_stage?: string | null
           updated_at?: string
         }
         Update: {
+          admission_stage?: string | null
           age?: number
           created_at?: string
           device_concern?: boolean
+          device_data_age_minutes?: number | null
+          device_issue?: string | null
+          device_next_action?: string | null
+          device_owner?: string | null
+          device_type?: string | null
           diagnosis?: string
           discharge_ready?: boolean
+          episode_state?: string
           heart_rate?: number | null
           id?: string
           last_observation?: string
@@ -184,6 +213,7 @@ export type Database = {
           pathway?: string
           pronouns?: string
           reason?: string
+          referred_at?: string | null
           region?: string
           respiratory_rate?: number | null
           score?: number
@@ -192,7 +222,10 @@ export type Database = {
           systolic_bp?: number | null
           team?: string
           temperature?: number | null
+          transfer_destination?: string | null
+          transfer_eta?: string | null
           transfer_in_progress?: boolean
+          transfer_stage?: string | null
           updated_at?: string
         }
         Relationships: []
@@ -282,7 +315,52 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      lantern_admission_worklist: {
+        Args: never
+        Returns: {
+          id: string
+          name: string
+          owner: string
+          pathway: string
+          referred_at: string
+          region: string
+          stage: string
+        }[]
+      }
+      lantern_device_worklist: {
+        Args: never
+        Returns: {
+          data_age_minutes: number
+          device_type: string
+          id: string
+          issue: string
+          name: string
+          next_action: string
+          owner: string
+          status: string
+        }[]
+      }
+      lantern_transfer_worklist: {
+        Args: never
+        Returns: {
+          destination: string
+          eta: string
+          id: string
+          name: string
+          owner: string
+          reason: string
+          stage: string
+          status: string
+        }[]
+      }
+      lantern_worklist_summary: {
+        Args: never
+        Returns: {
+          bucket: string
+          kind: string
+          total: number
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
