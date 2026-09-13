@@ -11,12 +11,15 @@ import { TrendChart } from "./TrendChart";
 import { patients, primaryPatient, network, regions, roles, scenarios, statusMeta, type Patient, type Signal } from "@/lib/lantern-data";
 import { cn } from "@/lib/utils";
 import { OperationalDrilldown, type MetricView } from "./OperationalDrilldown";
+import { PatientCrm } from "./PatientCrm";
+import { CrmProvider } from "@/lib/crm-store";
 
-type View = "network"|"queue"|"patient"|"alert"|"handover"|"patientapp"|"observation"|"scenarios"|"governance"|"users"|"emergency"|"admission"|MetricView;
+type View = "network"|"queue"|"crm"|"patient"|"alert"|"handover"|"patientapp"|"observation"|"scenarios"|"governance"|"users"|"emergency"|"admission"|MetricView;
 
 const navigation: Array<{id:View;label:string;icon:typeof Home;section?:string}> = [
   {id:"network",label:"Network command",icon:Network},
   {id:"queue",label:"Clinical queue",icon:ClipboardCheck},
+  {id:"crm",label:"Patient records",icon:Users},
   {id:"patient",label:"Patient record",icon:HeartPulse},
   {id:"alert",label:"Alert review",icon:Bell},
   {id:"handover",label:"Escalation",icon:Ambulance},
@@ -30,6 +33,10 @@ const navigation: Array<{id:View;label:string;icon:typeof Home;section?:string}>
 ];
 
 export function RatanaApp() {
+  return <CrmProvider><RatanaConsole /></CrmProvider>;
+}
+
+function RatanaConsole() {
   const [view,setView] = useState<View>("network");
   const [selected,setSelected] = useState<Patient>(primaryPatient);
   const [role,setRole] = useState(roles[0]);
@@ -70,6 +77,7 @@ export function RatanaApp() {
       <main id="main" className="min-w-0 flex-1 overflow-x-hidden">
         {view==="network"&&<NetworkView onOpen={openPatient} onQueue={()=>setView("queue")} onMetric={openMetric} />}
         {view==="queue"&&<QueueView onOpen={openPatient} />}
+        {view==="crm"&&<PatientCrm notify={setNotice} />}
         {view==="patient"&&<PatientView patient={selected} onView={setView} notify={setNotice} />}
         {view==="alert"&&<AlertView patient={selected} onView={setView} notify={setNotice} />}
         {view==="handover"&&<HandoverView patient={selected} onView={setView} notify={setNotice} />}
