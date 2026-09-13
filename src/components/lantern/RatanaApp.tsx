@@ -32,15 +32,9 @@ export function RatanaApp() {
   const [view,setView] = useState<View>("network");
   const [selected,setSelected] = useState<Patient>(primaryPatient);
   const [role,setRole] = useState(roles[0]);
-  const [dark,setDark] = useState(false);
   const [mobileNav,setMobileNav] = useState(false);
   const [notice,setNotice] = useState("");
 
-  useEffect(() => {
-    const autoDark = new Date().getHours() >= 19 || new Date().getHours() < 7;
-    setDark(autoDark);
-  }, []);
-  useEffect(() => { document.documentElement.classList.toggle("dark",dark); },[dark]);
   useEffect(() => { if (!notice) return; const id=window.setTimeout(()=>setNotice(""),3200); return()=>window.clearTimeout(id); },[notice]);
 
   const openPatient=(p:Patient,next:View="patient")=>{setSelected(p);setView(next);setMobileNav(false)};
@@ -54,7 +48,6 @@ export function RatanaApp() {
       <Brand />
       <div className="ml-5 hidden border-l border-border pl-5 text-xs text-muted-foreground md:block">National command · <span className="font-medium text-foreground">Morning shift</span></div>
       <div className="ml-auto flex items-center gap-2">
-        <Button variant="ghost" size="icon" onClick={()=>setDark(v=>!v)} aria-label={dark?"Use day theme":"Use night theme"}>{dark?<Sun/>:<Moon/>}</Button>
         <div className="hidden text-right text-xs sm:block"><div className="font-semibold">Noah Williams</div><div className="text-muted-foreground">{role}</div></div>
       </div>
     </header>
