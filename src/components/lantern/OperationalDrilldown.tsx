@@ -52,7 +52,7 @@ export function OperationalDrilldown({ metric, onBack, notify, audit }: { metric
       <Button variant="ghost" size="sm" onClick={onBack} className="mb-3 px-0"><ChevronLeft />Network command</Button>
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between"><div><div className="mb-1 text-[11px] font-semibold uppercase text-primary">Network command / {spec.title}</div><h1 className="font-display text-3xl font-semibold">{spec.title}</h1><p className="mt-1 max-w-3xl text-sm text-muted-foreground">{spec.summary} · Sunday 13 September 2026 · 08:49 AEST · Morning shift</p></div><Button onClick={() => action(spec.primary)}>{spec.primary}<ChevronRight /></Button></div>
     </div>
-    <div className="space-y-5 p-5 lg:p-8">
+    <div className="min-w-0 space-y-5 overflow-hidden p-5 lg:p-8">
       <section className="grid grid-cols-2 gap-3 lg:grid-cols-5" aria-label={`${spec.title} summary`}><Summary label={spec.unit} value={spec.total}/>{spec.stats.map(([label,value])=><Summary key={label} label={label} value={value}/>)}</section>
       <div className="flex flex-wrap items-center gap-2"><Filter className="size-4 text-muted-foreground"/>{spec.filters.map(item=><Button key={item} size="sm" variant={filter===item?"default":"outline"} onClick={()=>setActiveFilter(item)}>{item}</Button>)}</div>
       {metric === "pressure" ? <PressureView filter={filter} action={action}/> : metric === "forecast" ? <ForecastView filter={filter} setFilter={setActiveFilter} action={action}/> : <Worklist metric={metric} rows={rows} selected={selected} setSelected={setSelected} action={action}/>} 
