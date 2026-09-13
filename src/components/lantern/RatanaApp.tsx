@@ -127,9 +127,18 @@ function QueueView({onOpen}:{onOpen:(p:Patient)=>void}){
   const [page,setPage]=useState(0);
   const {data,isLoading}=useClinicalQueue(filter==="all"?null:filter,page,QUEUE_PAGE);
   const rows=data??[];
-  const total=rows.length?Number(rows[0].total):0;
+  const total=rows[0]?Number(rows[0].total):0;
+  const toPatient=(r:(typeof rows)[number]):Patient=>{
+    const base:Patient={id:r.id,name:r.name,age:r.age,pronouns:r.pronouns,diagnosis:r.diagnosis,pathway:r.pathway,status:r.status as Signal,score:r.score,region:r.region,team:r.team,owner:r.owner,observed:r.last_observation,reason:r.reason};
+    if(r.heart_rate!=null)base.hr=r.heart_rate;
+    if(r.spo2!=null)base.spo2=r.spo2;
+    if(r.respiratory_rate!=null)base.rr=r.respiratory_rate;
+    if(r.systolic_bp!=null)base.bp=r.systolic_bp;
+    if(r.temperature!=null)base.temp=Number(r.temperature);
+    return base;
+  };
   const shown:Patient[]=rows.length
-    ? rows.map(r=>({id:r.id,name:r.name,age:r.age,pronouns:r.pronouns,diagnosis:r.diagnosis,pathway:r.pathway,status:r.status as Signal,score:r.score,region:r.region,team:r.team,owner:r.owner,observed:r.last_observation,reason:r.reason,hr:r.heart_rate??undefined,spo2:r.spo2??undefined,rr:r.respiratory_rate??undefined,bp:r.systolic_bp??undefined,temp:r.temperature==null?undefined:Number(r.temperature)}))
+    ? rows.map(toPatient)
     : (filter==="all"?patients:patients.filter(p=>p.status===filter));
   const from=total?page*QUEUE_PAGE+1:0;
   const to=Math.min(total,page*QUEUE_PAGE+rows.length);
