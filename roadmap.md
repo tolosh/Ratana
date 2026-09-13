@@ -13,6 +13,6 @@
 - [x] Build public Rātana home page from supplied specification
 - [x] Move synthetic MVP to /demo and verify all calls to action
 - [x] Validate desktop/mobile home page
-- [ ] Publish the verified Rātana release
-- [ ] Remove all visible synthetic-data descriptions across the Rātana UI
-- [ ] Revalidate and republish after terminology removal
+- [x] Publish the verified Rātana release
+- [x] Remove all visible synthetic-data descriptions across the Rātana UI
+- [x] Revalidate and republish after terminology removal
