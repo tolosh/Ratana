@@ -88,6 +88,7 @@ export function RatanaHome() {
             <a href="#how-it-works" className="text-sm font-medium hover:text-primary">How it works</a>
             <a href="#platform" className="text-sm font-medium hover:text-primary">Platform</a>
             <a href="#demo" className="text-sm font-medium hover:text-primary">Demo</a>
+            <a href="#contact" className="text-sm font-medium hover:text-primary">Contact</a>
             <DemoButton />
           </nav>
           <Button variant="ghost" size="icon" className="ml-auto lg:hidden" onClick={() => setMenuOpen((open) => !open)} aria-label={menuOpen ? "Close navigation" : "Open navigation"} aria-expanded={menuOpen}>
@@ -97,7 +98,7 @@ export function RatanaHome() {
         {menuOpen && (
           <nav aria-label="Mobile navigation" className="border-t border-border bg-background px-5 py-4 lg:hidden">
             <div className="mx-auto flex max-w-7xl flex-col gap-1">
-              {[['Problem', '#problem'], ['How it works', '#how-it-works'], ['Platform', '#platform'], ['Demo', '#demo']].map(([label, href]) => (
+              {[['Problem', '#problem'], ['How it works', '#how-it-works'], ['Platform', '#platform'], ['Demo', '#demo'], ['Contact', '#contact']].map(([label, href]) => (
                 <a key={href} href={href} onClick={closeMenu} className="flex min-h-11 items-center border-b border-border text-sm font-medium">{label}</a>
               ))}
               <DemoButton className="mt-3 w-full" />
