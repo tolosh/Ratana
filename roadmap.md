@@ -19,3 +19,4 @@
 - [x] Add a public enquiries form
 - [ ] Deliver enquiries to colin@billycan.biz
 - [ ] Validate form and republish
+- [x] Research article "The Next Hospital Bed Is At Home" at /research, linked "Read more" from Problem section
