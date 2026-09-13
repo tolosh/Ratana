@@ -5,7 +5,6 @@ import {
   Ambulance,
   ArrowRight,
   ClipboardCheck,
-  Database,
   FileCheck2,
   Menu,
   Network,
@@ -105,9 +104,6 @@ export function RatanaHome() {
       <main id="content">
         <section className="overflow-hidden border-b border-border bg-card">
           <div className="mx-auto max-w-7xl px-5 pb-0 pt-12 text-center sm:pt-16 lg:px-8 lg:pt-20">
-            <div className="mx-auto mb-5 inline-flex items-center gap-2 border border-machine bg-machine-soft px-3 py-2 text-xs font-semibold text-machine">
-              <Database className="size-4" /> Synthetic Hospital in the Home platform
-            </div>
             <h1 className="mx-auto max-w-5xl font-display text-4xl font-semibold leading-[1.08] text-night sm:text-5xl lg:text-6xl">
               Move more hospital care home, without losing command of the patient journey.
             </h1>
@@ -118,9 +114,9 @@ export function RatanaHome() {
               <DemoButton className="w-full sm:w-auto" />
               <Button asChild variant="outline" size="lg" className="w-full sm:w-auto"><a href="#how-it-works">See how it works</a></Button>
             </div>
-            <p className="mx-auto mt-5 max-w-2xl text-sm font-medium text-primary">Synthetic MVP running with 5,000 active monitored patients. Cloud-backed and verified across desktop and mobile journeys.</p>
+            <p className="mx-auto mt-5 max-w-2xl text-sm font-medium text-primary">Live demonstration with 5,000 active monitored patients, verified across desktop and mobile journeys.</p>
             <div className="relative mx-auto mt-10 max-w-6xl border-x border-t border-border bg-muted p-2 sm:p-3">
-              <div className="flex h-8 items-center gap-2 border-b border-border bg-card px-3" aria-hidden="true"><span className="size-2 rounded-full bg-rapid" /><span className="size-2 rounded-full bg-review" /><span className="size-2 rounded-full bg-stable" /><span className="ml-2 font-mono text-[10px] text-muted-foreground">NETWORK COMMAND · SYNTHETIC</span></div>
+              <div className="flex h-8 items-center gap-2 border-b border-border bg-card px-3" aria-hidden="true"><span className="size-2 rounded-full bg-rapid" /><span className="size-2 rounded-full bg-review" /><span className="size-2 rounded-full bg-stable" /><span className="ml-2 font-mono text-[10px] text-muted-foreground">NETWORK COMMAND</span></div>
               <img src={dashboardImage} alt="Rātana Network Command showing 5,000 active monitored patients and 100% virtual-bed occupancy" className="block h-auto w-full border border-border" />
             </div>
           </div>
@@ -162,7 +158,7 @@ export function RatanaHome() {
 
         <section id="demo" className="scroll-mt-20 border-b border-border bg-night py-16 text-primary-foreground lg:py-24">
           <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 lg:grid-cols-[1fr_auto] lg:px-8">
-            <div><p className="text-xs font-semibold uppercase text-primary-foreground/70">Interactive release</p><h2 className="mt-3 font-display text-4xl font-semibold">Take the synthetic MVP for a run.</h2><p className="mt-5 max-w-3xl text-base leading-7 text-primary-foreground/75">Explore a cloud-backed synthetic release with 5,000 active monitored patients, desktop command workflows, mobile patient journeys, user onboarding, clinical queues, alert review, and emergency handover. No real patient data is used.</p><p className="mt-5 font-mono text-xs uppercase text-primary-foreground">Synthetic data only. Not for clinical use.</p></div>
+            <div><p className="text-xs font-semibold uppercase text-primary-foreground/70">Interactive release</p><h2 className="mt-3 font-display text-4xl font-semibold">Take Rātana for a run.</h2><p className="mt-5 max-w-3xl text-base leading-7 text-primary-foreground/75">Explore 5,000 active monitored patients, desktop command workflows, mobile patient journeys, user onboarding, clinical queues, alert review, and emergency handover.</p><p className="mt-5 font-mono text-xs uppercase text-primary-foreground">Demonstration platform · Not for clinical use.</p></div>
             <DemoButton className="w-full bg-background text-foreground hover:bg-muted lg:w-auto" />
           </div>
         </section>
@@ -170,7 +166,7 @@ export function RatanaHome() {
         <section className="border-b border-border py-16 lg:py-24">
           <div className="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-2 lg:px-8">
             <div><p className="text-xs font-semibold uppercase text-primary">Trust and governance</p><h2 className="mt-3 font-display text-4xl font-semibold leading-tight text-night">Designed for accountable clinical operations.</h2><p className="mt-5 text-base leading-7 text-muted-foreground">Machine-generated signals support judgement; they do not diagnose, prescribe, close clinical work or replace a clinician’s decision.</p></div>
-            <div><div className="grid gap-px border border-border bg-border sm:grid-cols-2">{trustPoints.map((point) => <div key={point} className="flex min-h-14 items-center gap-3 bg-card px-4 text-sm font-medium"><FileCheck2 className="size-4 shrink-0 text-primary" />{point}</div>)}</div><p className="mt-5 text-xs leading-5 text-muted-foreground">The current release is a synthetic MVP for demonstration and workflow validation. Production use would require clinical governance, pathway validation, regulatory assessment, privacy review, cybersecurity assurance, and integration sign-off.</p></div>
+            <div><div className="grid gap-px border border-border bg-border sm:grid-cols-2">{trustPoints.map((point) => <div key={point} className="flex min-h-14 items-center gap-3 bg-card px-4 text-sm font-medium"><FileCheck2 className="size-4 shrink-0 text-primary" />{point}</div>)}</div><p className="mt-5 text-xs leading-5 text-muted-foreground">The current release is for demonstration and workflow validation. Production use would require clinical governance, pathway validation, regulatory assessment, privacy review, cybersecurity assurance, and integration sign-off.</p></div>
           </div>
         </section>
 
@@ -180,7 +176,7 @@ export function RatanaHome() {
       </main>
 
       <footer className="border-t border-border bg-card">
-        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-5 py-8 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between lg:px-8"><Brand /><p>Rātana synthetic MVP · No real patient data · Not for clinical use</p></div>
+        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-5 py-8 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between lg:px-8"><Brand /><p>Rātana demonstration platform · Not for clinical use</p></div>
       </footer>
     </div>
   );
