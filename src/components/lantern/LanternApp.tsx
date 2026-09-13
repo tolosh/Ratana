@@ -28,7 +28,7 @@ const navigation: Array<{id:View;label:string;icon:typeof Home;section?:string}>
   {id:"emergency",label:"Emergency portal",icon:Ambulance},
 ];
 
-export function LanternApp() {
+export function RatanaApp() {
   const [view,setView] = useState<View>("network");
   const [selected,setSelected] = useState<Patient>(primaryPatient);
   const [role,setRole] = useState(roles[0]);
