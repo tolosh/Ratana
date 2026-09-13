@@ -8,3 +8,5 @@
 - [x] Build scenario control, governance, users, admission and discharge views
 - [x] Enable Lovable Cloud and seed the synthetic network catalogue
 - [x] Validate build, desktop and mobile interactions
+
+- [x] Occupancy model corrected: active monitored patients, fixed 100% virtual-bed occupancy, admissions pending, transfers in progress, service pressure, staffing headroom, workload forecast (DB + dashboard + seed data).
