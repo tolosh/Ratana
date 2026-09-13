@@ -67,7 +67,7 @@ export function RatanaApp() {
         </div>
       </aside>
       {mobileNav&&<button className="fixed inset-0 z-30 bg-foreground/20 lg:hidden" onClick={()=>setMobileNav(false)} aria-label="Close navigation overlay" />}
-      <main id="main" className="min-w-0 flex-1">
+      <main id="main" className="min-w-0 flex-1 overflow-x-hidden">
         {view==="network"&&<NetworkView onOpen={openPatient} onQueue={()=>setView("queue")} onMetric={openMetric} />}
         {view==="queue"&&<QueueView onOpen={openPatient} />}
         {view==="patient"&&<PatientView patient={selected} onView={setView} notify={setNotice} />}
