@@ -96,7 +96,9 @@ export type Database = {
         Row: {
           age: number
           created_at: string
+          device_concern: boolean
           diagnosis: string
+          discharge_ready: boolean
           heart_rate: number | null
           id: string
           last_observation: string
@@ -113,12 +115,15 @@ export type Database = {
           systolic_bp: number | null
           team: string
           temperature: number | null
+          transfer_in_progress: boolean
           updated_at: string
         }
         Insert: {
           age: number
           created_at?: string
+          device_concern?: boolean
           diagnosis: string
+          discharge_ready?: boolean
           heart_rate?: number | null
           id: string
           last_observation: string
@@ -135,12 +140,15 @@ export type Database = {
           systolic_bp?: number | null
           team: string
           temperature?: number | null
+          transfer_in_progress?: boolean
           updated_at?: string
         }
         Update: {
           age?: number
           created_at?: string
+          device_concern?: boolean
           diagnosis?: string
+          discharge_ready?: boolean
           heart_rate?: number | null
           id?: string
           last_observation?: string
@@ -157,6 +165,7 @@ export type Database = {
           systolic_bp?: number | null
           team?: string
           temperature?: number | null
+          transfer_in_progress?: boolean
           updated_at?: string
         }
         Relationships: []
