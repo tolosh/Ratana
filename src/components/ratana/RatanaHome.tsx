@@ -171,7 +171,7 @@ export function RatanaHome() {
         </section>
 
         <section className="bg-harbour-soft py-16 lg:py-20">
-          <div className="mx-auto max-w-4xl px-5 text-center lg:px-8"><UserRoundCheck className="mx-auto size-8 text-primary" /><h2 className="mt-5 font-display text-4xl font-semibold leading-tight text-night">See what Hospital in the Home looks like at network scale.</h2><p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-muted-foreground">Launch the synthetic MVP and explore the national command view, clinical queue, patient app, onboarding, and escalation workflows.</p><DemoButton className="mt-7 w-full sm:w-auto" /></div>
+          <div className="mx-auto max-w-4xl px-5 text-center lg:px-8"><UserRoundCheck className="mx-auto size-8 text-primary" /><h2 className="mt-5 font-display text-4xl font-semibold leading-tight text-night">See what Hospital in the Home looks like at network scale.</h2><p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-muted-foreground">Launch Rātana and explore the national command view, clinical queue, patient app, onboarding, and escalation workflows.</p><DemoButton className="mt-7 w-full sm:w-auto" /></div>
         </section>
       </main>
 
