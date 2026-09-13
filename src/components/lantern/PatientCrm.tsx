@@ -68,7 +68,7 @@ function Bullets({ items }: { items: string[] }) {
   );
 }
 
-function Pill({ label, tone }: { label: string; tone?: "risk" | "muted" }) {
+function Pill({ label, tone }: { label: string; tone?: "risk" | "muted" | undefined }) {
   return <span className={cn("border px-2 py-1 text-[11px] font-semibold uppercase", tone === "risk" ? "border-rapid text-rapid" : "border-border text-muted-foreground")}>{label}</span>;
 }
 
@@ -625,11 +625,11 @@ function OverviewTab({ record, onSave, onSaveEpisode, onDelete }: { record: CrmR
         <Row k="Home access" v={record.homeAccessNotes} />
       </EditableSection>
 
-      <EditableSection title="Address" defs={addressDefs} source={record.address as unknown as Record<string, unknown>} onSave={(values) => onSave(record.id, { address: values as CrmRecord["address"] }, "Address updated", "address")}>
+      <EditableSection title="Address" defs={addressDefs} source={record.address as unknown as Record<string, unknown>} onSave={(values) => onSave(record.id, { address: values as unknown as CrmRecord["address"] }, "Address updated", "address")}>
         <Row k="Address" v={[record.address.line1, record.address.line2, record.address.suburbCity, record.address.stateRegion, record.address.postcode, record.address.country].filter(Boolean).join(", ")} />
       </EditableSection>
 
-      <EditableSection title="Patient state" description="Clinical status, trajectory and safety flags shown across the console." defs={stateDefs} source={record.state as unknown as Record<string, unknown>} onSave={(values) => onSave(record.id, { state: values as CrmRecord["state"] }, "Patient state updated", "state")}>
+      <EditableSection title="Patient state" description="Clinical status, trajectory and safety flags shown across the console." defs={stateDefs} source={record.state as unknown as Record<string, unknown>} onSave={(values) => onSave(record.id, { state: values as unknown as CrmRecord["state"] }, "Patient state updated", "state")}>
         <Row k="Clinical status" v={labels.clinicalStatus[record.state.clinicalStatus]} />
         <Row k="Trajectory" v={labels.trajectory[record.state.trajectory]} />
         <Row k="Risk" v={labels.riskLevel[record.state.riskLevel]} />
@@ -894,7 +894,7 @@ function ListTab({
 }) {
   const [adding, setAdding] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
-  const items = record[listKey] as Array<Record<string, unknown> & { id: string }>;
+  const items = record[listKey] as unknown as Array<Record<string, unknown> & { id: string }>;
   const singular = title.replace(/s$/, "").toLowerCase();
 
   return (
