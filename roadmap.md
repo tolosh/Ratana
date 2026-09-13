@@ -22,5 +22,5 @@
 - [x] Research article "The Next Hospital Bed Is At Home" at /research, linked "Read more" from Problem section
 - [x] Review and refine the technology platform draft
 - [x] Build /technology and link it from the home page
-- [ ] Validate the technology page across desktop and mobile
+- [x] Validate the technology page across desktop and mobile
 - [ ] Publish the technology page release
