@@ -5,7 +5,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Network Command — Rātana" },
-      { name: "description", content: "Explore Rātana’s synthetic 5,000-bed Hospital in the Home operations prototype." },
+      { name: "description", content: "Explore Rātana’s synthetic 5,000 active monitored patient Hospital in the Home operations prototype." },
       { property: "og:title", content: "Network Command — Rātana" },
       { property: "og:description", content: "A synthetic Hospital in the Home operations prototype." },
       { property: "og:type", content: "website" },
