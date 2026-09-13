@@ -20,3 +20,7 @@
 - [ ] Deliver enquiries to colin@billycan.biz
 - [ ] Validate form and republish
 - [x] Research article "The Next Hospital Bed Is At Home" at /research, linked "Read more" from Problem section
+- [ ] Review and refine the technology platform draft
+- [ ] Build /technology and link it from the home page
+- [ ] Validate the technology page across desktop and mobile
+- [ ] Publish the technology page release
