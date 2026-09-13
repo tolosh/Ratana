@@ -8,7 +8,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { SignalBadge, MachineMark } from "./SignalBadge";
 import { TrendChart } from "./TrendChart";
-import { patients, regions, roles, scenarios, statusMeta, type Patient, type Signal } from "@/lib/lantern-data";
+import { patients, primaryPatient, regions, roles, scenarios, statusMeta, type Patient, type Signal } from "@/lib/lantern-data";
 import { cn } from "@/lib/utils";
 
 type View = "network"|"queue"|"patient"|"alert"|"handover"|"patientapp"|"observation"|"scenarios"|"governance"|"users"|"emergency"|"admission";
@@ -30,7 +30,7 @@ const navigation: Array<{id:View;label:string;icon:typeof Home;section?:string}>
 
 export function LanternApp() {
   const [view,setView] = useState<View>("network");
-  const [selected,setSelected] = useState<Patient>(patients[0]);
+  const [selected,setSelected] = useState<Patient>(primaryPatient);
   const [role,setRole] = useState(roles[0]);
   const [dark,setDark] = useState(false);
   const [mobileNav,setMobileNav] = useState(false);
@@ -77,7 +77,7 @@ export function LanternApp() {
         {view==="patient"&&<PatientView patient={selected} onView={setView} notify={setNotice} />}
         {view==="alert"&&<AlertView patient={selected} onView={setView} notify={setNotice} />}
         {view==="handover"&&<HandoverView patient={selected} onView={setView} notify={setNotice} />}
-        {view==="scenarios"&&<ScenariosView notify={setNotice} onOpen={()=>openPatient(patients[0])} />}
+        {view==="scenarios"&&<ScenariosView notify={setNotice} onOpen={()=>openPatient(primaryPatient)} />}
         {view==="governance"&&<GovernanceView />}
         {view==="users"&&<UsersView notify={setNotice} />}
         {view==="emergency"&&<EmergencyView patient={selected} notify={setNotice} />}

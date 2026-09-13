@@ -6,8 +6,10 @@ export interface Patient {
   reason: string; hr?: number; spo2?: number; rr?: number; bp?: number; temp?: number;
 }
 
+export const primaryPatient: Patient = { id:"pat-1001", name:"Mara Ellis", age:72, pronouns:"she/her", diagnosis:"COPD exacerbation", pathway:"Respiratory virtual ward", status:"rapid", score:82, region:"South Metro", team:"Respiratory Blue", owner:"Dr Asha Rao", observed:"08:42 AEST", reason:"SpO₂ fell 6 points in 45 min; work of breathing increased", hr:112, spo2:88, rr:28, bp:104, temp:37.8 };
+
 export const patients: Patient[] = [
-  { id:"pat-1001", name:"Mara Ellis", age:72, pronouns:"she/her", diagnosis:"COPD exacerbation", pathway:"Respiratory virtual ward", status:"rapid", score:82, region:"South Metro", team:"Respiratory Blue", owner:"Dr Asha Rao", observed:"08:42 AEST", reason:"SpO₂ fell 6 points in 45 min; work of breathing increased", hr:112, spo2:88, rr:28, bp:104, temp:37.8 },
+  primaryPatient,
   { id:"pat-1002", name:"John Bell", age:81, pronouns:"he/him", diagnosis:"Heart failure", pathway:"Cardiac virtual ward", status:"review", score:61, region:"Central", team:"Cardiac West", owner:"RN Mia Chen", observed:"08:36 AEST", reason:"Weight +1.8 kg in 48 h with increasing breathlessness", hr:96, spo2:93, rr:22, bp:146, temp:36.7 },
   { id:"pat-1003", name:"Ana Santos", age:58, pronouns:"she/her", diagnosis:"Post-operative recovery", pathway:"Surgical step-down", status:"review", score:54, region:"North Metro", team:"Surgical North", owner:"RN Leo Morgan", observed:"08:31 AEST", reason:"Temperature trend and wound pain need review", hr:102, spo2:96, rr:20, bp:118, temp:38.1 },
   { id:"pat-1004", name:"David Okafor", age:67, pronouns:"he/him", diagnosis:"Cellulitis", pathway:"IV antibiotics at home", status:"nodata", score:47, region:"Regional", team:"Regional Acute", owner:"RN Priya Nair", observed:"06:10 AEST", reason:"No observations received for 2 h 32 min" },
