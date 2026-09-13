@@ -2,8 +2,8 @@ import { useEffect, useMemo, useState } from "react";
 import {
   Activity, AlertTriangle, Ambulance, BarChart3, Bell, ChevronLeft, ChevronRight,
   ClipboardCheck, Clock3, FileClock, HeartPulse, Home, ListFilter,
-  Map, Menu, Moon, Network, Pause, Play, RotateCcw, Search, Settings2, ShieldCheck,
-  Smartphone, Stethoscope, Sun, Users, X, Check, Radio, Thermometer, Wind,
+  Map, Menu, Network, Pause, Play, RotateCcw, Search, Settings2, ShieldCheck,
+  Smartphone, Stethoscope, Users, X, Check, Radio, Thermometer, Wind,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SignalBadge, MachineMark } from "./SignalBadge";
