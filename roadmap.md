@@ -7,4 +7,4 @@
 - [x] Build patient app and guided observation capture
 - [x] Build scenario control, governance, users, admission and discharge views
 - [x] Enable Lovable Cloud and seed the synthetic network catalogue
-- [ ] Validate build, desktop and mobile interactions
+- [x] Validate build, desktop and mobile interactions
