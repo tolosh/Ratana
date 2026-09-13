@@ -40,8 +40,8 @@ export function RatanaApp() {
   useEffect(() => { if (!notice) return; const id=window.setTimeout(()=>setNotice(""),3200); return()=>window.clearTimeout(id); },[notice]);
 
   const openPatient=(p:Patient,next:View="patient")=>{setSelected(p);setView(next);setMobileNav(false)};
-  const audit=(event:string,detail:string)=>setAuditEvents(current=>[["08:49:30","Noah Williams",event,detail,"Console"],...current].slice(0,8));
-  const openMetric=(metric:MetricView,filter?:string)=>{setView(metric);audit("dashboard_metric_card_clicked",`${metric}${filter?` · ${filter}`:""}`);setAuditEvents(current=>[["08:49:31","Noah Williams","dashboard_metric_drilldown_viewed",metric,"Console"],...current].slice(0,8));};
+  const audit=(event:string,detail:string)=>setAuditEvents(current=>{const entry:[string,string,string,string,string]=["08:49:30","Noah Williams",event,detail,"Console"];return [entry,...current].slice(0,8);});
+  const openMetric=(metric:MetricView,filter?:string)=>{setView(metric);audit("dashboard_metric_card_clicked",`${metric}${filter?` · ${filter}`:""}`);setAuditEvents(current=>{const entry:[string,string,string,string,string]=["08:49:31","Noah Williams","dashboard_metric_drilldown_viewed",metric,"Console"];return [entry,...current].slice(0,8);});};
   const isPatientSurface=view==="patientapp"||view==="observation";
 
   if (isPatientSurface) return <PatientSurface view={view} onView={setView} onExit={()=>setView("network")} notify={setNotice} />;
