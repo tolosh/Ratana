@@ -159,6 +159,11 @@ export function RatanaHome() {
             <div>
               <p className="text-xl leading-8">Hospitals are full, but many patients no longer need to be inside the building to receive hospital-level care. The challenge is operational: knowing who is stable, who is deteriorating, who has gone silent, who needs review, and who needs to come back in.</p>
               <p className="mt-5 text-base leading-7 text-muted-foreground">Hospital in the Home programs can free physical beds, but scaling them means coordinating thousands of patients, many diagnoses, devices, teams and moments where no data can be as important as abnormal data.</p>
+              <Button asChild variant="outline" className="mt-6">
+                <Link to="/research">
+                  Read more: the opportunity <ArrowRight aria-hidden="true" />
+                </Link>
+              </Button>
               <div className="mt-8 grid gap-px border border-border bg-border sm:grid-cols-3">
                 {["Patients wait because hospital capacity is constrained.", "Clinicians cannot safely scale home care from disconnected dashboards.", "Device data is useful only when it becomes accountable clinical work."].map((item, index) => <div key={item} className="bg-card p-5"><span className="font-mono text-sm text-primary">0{index + 1}</span><p className="mt-4 text-sm font-semibold leading-6">{item}</p></div>)}
               </div>
