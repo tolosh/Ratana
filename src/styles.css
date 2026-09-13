@@ -2,8 +2,6 @@
 @source "../src";
 @import "tw-animate-css";
 
-@custom-variant dark (&:where(.dark, .dark *));
-
 @theme inline {
   --font-sans: "IBM Plex Sans", sans-serif;
   --font-display: "Newsreader", serif;
@@ -93,42 +91,6 @@
   --lamplight-edge: oklch(0.89 0.048 77);
   --night: oklch(0.20 0.037 210);
   --harbour-soft: oklch(0.91 0.03 213);
-}
-
-.dark {
-  --background: oklch(0.18 0.025 213);
-  --foreground: oklch(0.93 0.01 210);
-  --card: oklch(0.22 0.027 213);
-  --card-foreground: var(--foreground);
-  --popover: oklch(0.23 0.027 213);
-  --popover-foreground: var(--foreground);
-  --primary: oklch(0.64 0.09 211);
-  --primary-foreground: oklch(0.14 0.02 213);
-  --secondary: oklch(0.27 0.027 213);
-  --secondary-foreground: var(--foreground);
-  --muted: oklch(0.25 0.018 213);
-  --muted-foreground: oklch(0.72 0.02 210);
-  --accent: oklch(0.30 0.04 212);
-  --accent-foreground: var(--foreground);
-  --border: oklch(0.38 0.025 212);
-  --input: oklch(0.42 0.03 212);
-  --ring: oklch(0.64 0.09 211);
-  --sidebar: oklch(0.145 0.029 213);
-  --sidebar-foreground: var(--foreground);
-  --sidebar-accent: oklch(0.25 0.034 212);
-  --sidebar-accent-foreground: var(--foreground);
-  --sidebar-border: oklch(0.32 0.028 212);
-  --machine: oklch(0.71 0.15 292);
-  --machine-soft: oklch(0.27 0.05 292);
-  --stable: oklch(0.70 0.14 153);
-  --stable-soft: oklch(0.25 0.05 153);
-  --review: oklch(0.77 0.13 78);
-  --review-soft: oklch(0.29 0.055 75);
-  --rapid: oklch(0.70 0.16 27);
-  --rapid-soft: oklch(0.28 0.07 27);
-  --nodata: oklch(0.68 0.025 210);
-  --nodata-soft: oklch(0.27 0.018 210);
-  --harbour-soft: oklch(0.28 0.045 213);
 }
 
 @layer base {
