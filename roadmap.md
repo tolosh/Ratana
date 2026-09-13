@@ -23,4 +23,6 @@
 - [x] Review and refine the technology platform draft
 - [x] Build /technology and link it from the home page
 - [x] Validate the technology page across desktop and mobile
-- [x] Publish the technology page release
+- [ ] Publish the technology page release
+- [x] Expand Connect, Understand, Coordinate, and Govern with implementation detail
+- [ ] Revalidate and publish the expanded technology page
