@@ -26,6 +26,6 @@
 - [ ] Publish the technology page release
 - [x] Expand Connect, Understand, Coordinate, and Govern with implementation detail
 - [ ] Revalidate and publish the expanded technology page
-- [ ] Activate the five Network Command KPI cards
-- [ ] Add actionable detail views for admissions, transfers, devices, pressure, and forecast
+- [x] Activate the five Network Command KPI cards
+- [x] Add actionable detail views for admissions, transfers, devices, pressure, and forecast
 - [ ] Validate keyboard, desktop, and mobile card drill-downs
