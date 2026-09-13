@@ -29,3 +29,5 @@
 - [x] Activate the five Network Command KPI cards
 - [x] Add actionable detail views for admissions, transfers, devices, pressure, and forecast
 - [ ] Validate keyboard, desktop, and mobile card drill-downs
+- [x] Clinical CRM patient model with full create, read, update and delete across identity, episodes, clinical detail, monitoring, care plan, notes, tasks, contacts, care team, communications, documents and audit
+- [x] Validate the CRM on desktop and mobile
