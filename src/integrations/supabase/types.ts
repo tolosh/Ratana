@@ -16,54 +16,78 @@ export type Database = {
     Tables: {
       lantern_network_snapshots: {
         Row: {
+          active_patients: number
           admissions: number
-          capacity: number
+          admissions_pending: number
           clinical_review: number
           created_at: string
           device_concerns: number
           id: string
           likely_discharges: number
           no_data: number
-          occupied: number
+          occupancy_percent: number
           rapid_response: number
           region: string
+          service_pressure: string
           stable: number
+          staffing_headroom: string
+          staffing_pressure_percent: number
           transfers: number
+          transfers_in_progress: number
           updated_at: string
+          workload_forecast_24h: number
+          workload_forecast_4h: number
+          workload_forecast_8h: number
           workload_percent: number
         }
         Insert: {
+          active_patients?: number
           admissions: number
-          capacity: number
+          admissions_pending?: number
           clinical_review: number
           created_at?: string
           device_concerns: number
           id?: string
           likely_discharges: number
           no_data: number
-          occupied: number
+          occupancy_percent?: number
           rapid_response: number
           region: string
+          service_pressure?: string
           stable: number
+          staffing_headroom?: string
+          staffing_pressure_percent?: number
           transfers: number
+          transfers_in_progress?: number
           updated_at?: string
+          workload_forecast_24h?: number
+          workload_forecast_4h?: number
+          workload_forecast_8h?: number
           workload_percent: number
         }
         Update: {
+          active_patients?: number
           admissions?: number
-          capacity?: number
+          admissions_pending?: number
           clinical_review?: number
           created_at?: string
           device_concerns?: number
           id?: string
           likely_discharges?: number
           no_data?: number
-          occupied?: number
+          occupancy_percent?: number
           rapid_response?: number
           region?: string
+          service_pressure?: string
           stable?: number
+          staffing_headroom?: string
+          staffing_pressure_percent?: number
           transfers?: number
+          transfers_in_progress?: number
           updated_at?: string
+          workload_forecast_24h?: number
+          workload_forecast_4h?: number
+          workload_forecast_8h?: number
           workload_percent?: number
         }
         Relationships: []
