@@ -10,3 +10,6 @@
 - [x] Validate build, desktop and mobile interactions
 
 - [x] Occupancy model corrected: active monitored patients, fixed 100% virtual-bed occupancy, admissions pending, transfers in progress, service pressure, staffing headroom, workload forecast (DB + dashboard + seed data).
+- [ ] Build public Rātana home page from supplied specification
+- [ ] Move synthetic MVP to /demo and verify all calls to action
+- [ ] Validate desktop/mobile home page and publish
