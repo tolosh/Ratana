@@ -203,6 +203,37 @@ export function RatanaHome() {
         <section className="bg-harbour-soft py-16 lg:py-20">
           <div className="mx-auto max-w-4xl px-5 text-center lg:px-8"><UserRoundCheck className="mx-auto size-8 text-primary" /><h2 className="mt-5 font-display text-4xl font-semibold leading-tight text-night">See what Hospital in the Home looks like at network scale.</h2><p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-muted-foreground">Launch Rātana and explore the national command view, clinical queue, patient app, onboarding, and escalation workflows.</p><DemoButton className="mt-7 w-full sm:w-auto" /></div>
         </section>
+
+        <section id="contact" className="scroll-mt-20 py-16 lg:py-24">
+          <div className="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-2 lg:px-8">
+            <div>
+              <p className="text-xs font-semibold uppercase text-primary">Contact</p>
+              <h2 className="mt-3 font-display text-4xl font-semibold leading-tight text-night">Talk to us about Hospital in the Home.</h2>
+              <p className="mt-5 max-w-xl text-base leading-7 text-muted-foreground">Whether you're planning a new program or scaling an existing one, tell us a little about your service and we'll be in touch.</p>
+            </div>
+            <form onSubmit={handleSubmit} className="grid gap-5 border border-border bg-card p-6 sm:p-8" noValidate={false}>
+              <div className="grid gap-2">
+                <Label htmlFor="contact-name">Name</Label>
+                <Input id="contact-name" required maxLength={100} autoComplete="name" value={form.name} onChange={updateField("name")} />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="contact-organisation">Organisation <span className="text-muted-foreground">(optional)</span></Label>
+                <Input id="contact-organisation" maxLength={150} autoComplete="organization" value={form.organisation} onChange={updateField("organisation")} />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="contact-email">Email</Label>
+                <Input id="contact-email" type="email" required maxLength={255} autoComplete="email" value={form.email} onChange={updateField("email")} />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="contact-message">Message</Label>
+                <Textarea id="contact-message" required maxLength={2000} rows={5} value={form.message} onChange={updateField("message")} />
+              </div>
+              <Button type="submit" size="lg" disabled={sending} className="w-full sm:w-auto">
+                {sending ? "Sending…" : sent ? "Send another enquiry" : "Send enquiry"}
+              </Button>
+            </form>
+          </div>
+        </section>
       </main>
 
       <footer className="border-t border-border bg-card">
