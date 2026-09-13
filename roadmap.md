@@ -24,3 +24,5 @@
 - [x] Build /technology and link it from the home page
 - [x] Validate the technology page across desktop and mobile
 - [x] Publish the technology page release
+- [ ] Expand Connect, Understand, Coordinate, and Govern with implementation detail
+- [ ] Revalidate and publish the expanded technology page
