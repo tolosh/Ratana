@@ -14,7 +14,206 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      lantern_network_snapshots: {
+        Row: {
+          admissions: number
+          capacity: number
+          clinical_review: number
+          created_at: string
+          device_concerns: number
+          id: string
+          likely_discharges: number
+          no_data: number
+          occupied: number
+          rapid_response: number
+          region: string
+          stable: number
+          transfers: number
+          updated_at: string
+          workload_percent: number
+        }
+        Insert: {
+          admissions: number
+          capacity: number
+          clinical_review: number
+          created_at?: string
+          device_concerns: number
+          id?: string
+          likely_discharges: number
+          no_data: number
+          occupied: number
+          rapid_response: number
+          region: string
+          stable: number
+          transfers: number
+          updated_at?: string
+          workload_percent: number
+        }
+        Update: {
+          admissions?: number
+          capacity?: number
+          clinical_review?: number
+          created_at?: string
+          device_concerns?: number
+          id?: string
+          likely_discharges?: number
+          no_data?: number
+          occupied?: number
+          rapid_response?: number
+          region?: string
+          stable?: number
+          transfers?: number
+          updated_at?: string
+          workload_percent?: number
+        }
+        Relationships: []
+      }
+      lantern_patients: {
+        Row: {
+          age: number
+          created_at: string
+          diagnosis: string
+          heart_rate: number | null
+          id: string
+          last_observation: string
+          name: string
+          owner: string
+          pathway: string
+          pronouns: string
+          reason: string
+          region: string
+          respiratory_rate: number | null
+          score: number
+          spo2: number | null
+          status: string
+          systolic_bp: number | null
+          team: string
+          temperature: number | null
+          updated_at: string
+        }
+        Insert: {
+          age: number
+          created_at?: string
+          diagnosis: string
+          heart_rate?: number | null
+          id: string
+          last_observation: string
+          name: string
+          owner: string
+          pathway: string
+          pronouns: string
+          reason: string
+          region: string
+          respiratory_rate?: number | null
+          score: number
+          spo2?: number | null
+          status: string
+          systolic_bp?: number | null
+          team: string
+          temperature?: number | null
+          updated_at?: string
+        }
+        Update: {
+          age?: number
+          created_at?: string
+          diagnosis?: string
+          heart_rate?: number | null
+          id?: string
+          last_observation?: string
+          name?: string
+          owner?: string
+          pathway?: string
+          pronouns?: string
+          reason?: string
+          region?: string
+          respiratory_rate?: number | null
+          score?: number
+          spo2?: number | null
+          status?: string
+          systolic_bp?: number | null
+          team?: string
+          temperature?: number | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      lantern_role_assignments: {
+        Row: {
+          created_at: string
+          display_name: string
+          expires_at: string | null
+          id: string
+          organization: string
+          region: string | null
+          role: string
+          team: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          display_name: string
+          expires_at?: string | null
+          id?: string
+          organization: string
+          region?: string | null
+          role: string
+          team?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          display_name?: string
+          expires_at?: string | null
+          id?: string
+          organization?: string
+          region?: string | null
+          role?: string
+          team?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      lantern_scenarios: {
+        Row: {
+          created_at: string
+          description: string
+          duration_minutes: number
+          id: string
+          name: string
+          patient_id: string | null
+          state: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          duration_minutes: number
+          id: string
+          name: string
+          patient_id?: string | null
+          state?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          duration_minutes?: number
+          id?: string
+          name?: string
+          patient_id?: string | null
+          state?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lantern_scenarios_patient_id_fkey"
+            columns: ["patient_id"]
+            isOneToOne: false
+            referencedRelation: "lantern_patients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
