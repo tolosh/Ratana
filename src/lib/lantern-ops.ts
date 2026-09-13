@@ -143,6 +143,19 @@ export function useDeviceWorklist() {
   });
 }
 
+export function useClinicalQueue(status: string | null, page: number, pageSize = 25) {
+  return useQuery({
+    queryKey: ["lantern-queue", status, page, pageSize],
+    queryFn: async () => {
+      const args = { p_limit: pageSize, p_offset: page * pageSize, ...(status ? { p_status: status } : {}) };
+      const { data, error } = await supabase.rpc("lantern_clinical_queue", args);
+      if (error) throw error;
+      return data ?? [];
+    },
+    staleTime: 60_000,
+  });
+}
+
 export function waitingLabel(from: string | null): string {
   if (!from) return "—";
   const minutes = Math.max(0, Math.round((Date.now() - new Date(from).getTime()) / 60000));

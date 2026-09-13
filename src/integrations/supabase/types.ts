@@ -327,6 +327,30 @@ export type Database = {
           stage: string
         }[]
       }
+      lantern_clinical_queue: {
+        Args: { p_limit?: number; p_offset?: number; p_status?: string }
+        Returns: {
+          age: number
+          diagnosis: string
+          heart_rate: number
+          id: string
+          last_observation: string
+          name: string
+          owner: string
+          pathway: string
+          pronouns: string
+          reason: string
+          region: string
+          respiratory_rate: number
+          score: number
+          spo2: number
+          status: string
+          systolic_bp: number
+          team: string
+          temperature: number
+          total: number
+        }[]
+      }
       lantern_device_worklist: {
         Args: never
         Returns: {
