@@ -258,7 +258,13 @@ export function RatanaHome() {
       </main>
 
       <footer className="border-t border-border bg-card">
-        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-5 py-8 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between lg:px-8"><Brand /><p>Rātana demonstration platform · Not for clinical use</p></div>
+        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-5 py-8 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between lg:px-8">
+          <Brand />
+          <div className="flex flex-col gap-1 sm:items-end">
+            <p className="font-mono text-xs uppercase tracking-wide">Sydney · Dresden · Pune</p>
+            <p>Not for clinical use</p>
+          </div>
+        </div>
       </footer>
     </div>
   );
