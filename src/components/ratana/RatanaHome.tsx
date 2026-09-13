@@ -79,7 +79,7 @@ export function RatanaHome() {
   const closeMenu = () => setMenuOpen(false);
   const [form, setForm] = useState({ name: "", organisation: "", email: "", message: "" });
   const [sending, setSending] = useState(false);
-  const [sent, setSent] = useState(false);
+  const [sent, setSent] = useState(() => typeof window !== "undefined" && window.sessionStorage.getItem("ratana_enquiry_sent") === "1");
 
   const updateField = (field: keyof typeof form) => (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setForm((current) => ({ ...current, [field]: event.target.value }));
@@ -92,6 +92,7 @@ export function RatanaHome() {
       await submitEnquiry({ data: form });
       setSent(true);
       setForm({ name: "", organisation: "", email: "", message: "" });
+      if (typeof window !== "undefined") window.sessionStorage.setItem("ratana_enquiry_sent", "1");
       toast.success("Thanks — your enquiry has been received. We'll be in touch shortly.");
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "Your enquiry could not be sent. Please try again.");
