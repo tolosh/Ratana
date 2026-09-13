@@ -148,7 +148,7 @@ export function useClinicalQueue(status: string | null, page: number, pageSize =
     queryKey: ["lantern-queue", status, page, pageSize],
     queryFn: async () => {
       const { data, error } = await supabase.rpc("lantern_clinical_queue", {
-        p_status: status,
+        p_status: status ?? undefined,
         p_limit: pageSize,
         p_offset: page * pageSize,
       });
