@@ -14,6 +14,33 @@ export type Database = {
   }
   public: {
     Tables: {
+      lantern_enquiries: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          message: string
+          name: string
+          organisation: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          message: string
+          name: string
+          organisation?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          message?: string
+          name?: string
+          organisation?: string | null
+        }
+        Relationships: []
+      }
       lantern_network_snapshots: {
         Row: {
           active_patients: number

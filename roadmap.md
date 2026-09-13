@@ -16,6 +16,6 @@
 - [x] Publish the verified Rātana release
 - [x] Remove all visible synthetic-data descriptions across the Rātana UI
 - [x] Revalidate and republish after terminology removal
-- [ ] Add a public enquiries form
+- [x] Add a public enquiries form
 - [ ] Deliver enquiries to colin@billycan.biz
 - [ ] Validate form and republish

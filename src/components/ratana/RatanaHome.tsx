@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, type ChangeEvent, type FormEvent } from "react";
 import { Link } from "@tanstack/react-router";
+import { submitEnquiry } from "@/lib/contact.functions";
 import {
   Activity,
   Ambulance,
@@ -15,7 +16,11 @@ import {
   Users,
   X,
 } from "lucide-react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import dashboardImage from "@/assets/network-command.png";
 
 const platformFeatures = [
@@ -72,6 +77,29 @@ function DemoButton({ className = "" }: { className?: string }) {
 export function RatanaHome() {
   const [menuOpen, setMenuOpen] = useState(false);
   const closeMenu = () => setMenuOpen(false);
+  const [form, setForm] = useState({ name: "", organisation: "", email: "", message: "" });
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
+
+  const updateField = (field: keyof typeof form) => (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+    setForm((current) => ({ ...current, [field]: event.target.value }));
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (sending) return;
+    setSending(true);
+    try {
+      await submitEnquiry({ data: form });
+      setSent(true);
+      setForm({ name: "", organisation: "", email: "", message: "" });
+      toast.success("Thanks — your enquiry has been received. We'll be in touch shortly.");
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Your enquiry could not be sent. Please try again.");
+    } finally {
+      setSending(false);
+    }
+  };
+
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -84,6 +112,7 @@ export function RatanaHome() {
             <a href="#how-it-works" className="text-sm font-medium hover:text-primary">How it works</a>
             <a href="#platform" className="text-sm font-medium hover:text-primary">Platform</a>
             <a href="#demo" className="text-sm font-medium hover:text-primary">Demo</a>
+            <a href="#contact" className="text-sm font-medium hover:text-primary">Contact</a>
             <DemoButton />
           </nav>
           <Button variant="ghost" size="icon" className="ml-auto lg:hidden" onClick={() => setMenuOpen((open) => !open)} aria-label={menuOpen ? "Close navigation" : "Open navigation"} aria-expanded={menuOpen}>
@@ -93,7 +122,7 @@ export function RatanaHome() {
         {menuOpen && (
           <nav aria-label="Mobile navigation" className="border-t border-border bg-background px-5 py-4 lg:hidden">
             <div className="mx-auto flex max-w-7xl flex-col gap-1">
-              {[['Problem', '#problem'], ['How it works', '#how-it-works'], ['Platform', '#platform'], ['Demo', '#demo']].map(([label, href]) => (
+              {[['Problem', '#problem'], ['How it works', '#how-it-works'], ['Platform', '#platform'], ['Demo', '#demo'], ['Contact', '#contact']].map(([label, href]) => (
                 <a key={href} href={href} onClick={closeMenu} className="flex min-h-11 items-center border-b border-border text-sm font-medium">{label}</a>
               ))}
               <DemoButton className="mt-3 w-full" />
@@ -173,6 +202,37 @@ export function RatanaHome() {
 
         <section className="bg-harbour-soft py-16 lg:py-20">
           <div className="mx-auto max-w-4xl px-5 text-center lg:px-8"><UserRoundCheck className="mx-auto size-8 text-primary" /><h2 className="mt-5 font-display text-4xl font-semibold leading-tight text-night">See what Hospital in the Home looks like at network scale.</h2><p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-muted-foreground">Launch Rātana and explore the national command view, clinical queue, patient app, onboarding, and escalation workflows.</p><DemoButton className="mt-7 w-full sm:w-auto" /></div>
+        </section>
+
+        <section id="contact" className="scroll-mt-20 py-16 lg:py-24">
+          <div className="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-2 lg:px-8">
+            <div>
+              <p className="text-xs font-semibold uppercase text-primary">Contact</p>
+              <h2 className="mt-3 font-display text-4xl font-semibold leading-tight text-night">Talk to us about Hospital in the Home.</h2>
+              <p className="mt-5 max-w-xl text-base leading-7 text-muted-foreground">Whether you're planning a new program or scaling an existing one, tell us a little about your service and we'll be in touch.</p>
+            </div>
+            <form onSubmit={handleSubmit} className="grid gap-5 border border-border bg-card p-6 sm:p-8" noValidate={false}>
+              <div className="grid gap-2">
+                <Label htmlFor="contact-name">Name</Label>
+                <Input id="contact-name" required maxLength={100} autoComplete="name" value={form.name} onChange={updateField("name")} />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="contact-organisation">Organisation <span className="text-muted-foreground">(optional)</span></Label>
+                <Input id="contact-organisation" maxLength={150} autoComplete="organization" value={form.organisation} onChange={updateField("organisation")} />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="contact-email">Email</Label>
+                <Input id="contact-email" type="email" required maxLength={255} autoComplete="email" value={form.email} onChange={updateField("email")} />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="contact-message">Message</Label>
+                <Textarea id="contact-message" required maxLength={2000} rows={5} value={form.message} onChange={updateField("message")} />
+              </div>
+              <Button type="submit" size="lg" disabled={sending} className="w-full sm:w-auto">
+                {sending ? "Sending…" : sent ? "Send another enquiry" : "Send enquiry"}
+              </Button>
+            </form>
+          </div>
         </section>
       </main>
 
