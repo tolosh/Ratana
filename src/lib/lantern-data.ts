@@ -16,14 +16,35 @@ export const patients: Patient[] = [
   { id:"pat-1005", name:"Mei Tan", age:76, pronouns:"she/her", diagnosis:"Community-acquired pneumonia", pathway:"Respiratory virtual ward", status:"stable", score:24, region:"Coastal", team:"Respiratory Coast", owner:"RN Sam Webb", observed:"08:39 AEST", reason:"Observations within pathway range", hr:82, spo2:96, rr:18, bp:126, temp:36.8 },
 ];
 
-export const regions = [
-  {name:"North Metro",capacity:920,occupied:836,review:89,rapid:12,nodata:24,load:82},
-  {name:"South Metro",capacity:1080,occupied:987,review:105,rapid:14,nodata:24,load:91},
-  {name:"Coastal",capacity:760,occupied:672,review:71,rapid:9,nodata:21,load:74},
-  {name:"Central",capacity:980,occupied:901,review:101,rapid:15,nodata:24,load:88},
-  {name:"Western",capacity:680,occupied:601,review:60,rapid:7,nodata:18,load:69},
-  {name:"Regional",capacity:580,occupied:503,review:57,rapid:6,nodata:15,load:77},
+export interface Region {
+  name: string; active: number; review: number; rapid: number; nodata: number;
+  admissionsPending: number; discharges: number; transfers: number; pressure: number; headroom: string;
+}
+
+/** A virtual bed is an active monitored patient episode, so occupancy is always 100%. */
+export const NETWORK_OCCUPANCY_PERCENT = 100;
+
+export const regions: Region[] = [
+  {name:"Metro North",active:1050,review:210,rapid:74,nodata:84,admissionsPending:16,discharges:44,transfers:5,pressure:86,headroom:"Limited"},
+  {name:"Metro South",active:950,review:190,rapid:67,nodata:76,admissionsPending:14,discharges:40,transfers:4,pressure:91,headroom:"Limited"},
+  {name:"Western Region",active:800,review:160,rapid:56,nodata:64,admissionsPending:11,discharges:33,transfers:3,pressure:74,headroom:"Adequate"},
+  {name:"Regional Coastal",active:700,review:140,rapid:49,nodata:56,admissionsPending:10,discharges:29,transfers:3,pressure:78,headroom:"Adequate"},
+  {name:"Regional Inland",active:600,review:120,rapid:42,nodata:48,admissionsPending:8,discharges:25,transfers:2,pressure:82,headroom:"Limited"},
+  {name:"Hospital Partner Network",active:900,review:180,rapid:63,nodata:72,admissionsPending:13,discharges:38,transfers:4,pressure:88,headroom:"Limited"},
 ];
+
+export const network = {
+  activePatients: 5000,
+  occupancyPercent: NETWORK_OCCUPANCY_PERCENT,
+  admissionsPending: 72,
+  likelyDischarges: 209,
+  transfersInProgress: 21,
+  urgentLoad: 402,
+  deviceConcerns: 400,
+  servicePressure: "Strained",
+  staffingHeadroom: "Limited",
+  workload: {h4: 1270, h8: 1906, h24: 4348},
+};
 
 export const scenarios = [
   ["Respiratory deterioration","Mara Ellis","Falling oxygen saturation progresses through review, escalation and transfer.","12 min"],
