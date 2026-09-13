@@ -111,7 +111,7 @@ export function RatanaHome() {
           <nav aria-label="Primary navigation" className="ml-auto hidden items-center gap-7 lg:flex">
             <a href="#problem" className="text-sm font-medium hover:text-primary">Problem</a>
             <a href="#how-it-works" className="text-sm font-medium hover:text-primary">How it works</a>
-            <a href="#platform" className="text-sm font-medium hover:text-primary">Platform</a>
+            <Link to="/technology" className="text-sm font-medium hover:text-primary">Technology</Link>
             <a href="#demo" className="text-sm font-medium hover:text-primary">Demo</a>
             <a href="#contact" className="text-sm font-medium hover:text-primary">Contact</a>
             <DemoButton />
@@ -123,9 +123,10 @@ export function RatanaHome() {
         {menuOpen && (
           <nav aria-label="Mobile navigation" className="border-t border-border bg-background px-5 py-4 lg:hidden">
             <div className="mx-auto flex max-w-7xl flex-col gap-1">
-              {[['Problem', '#problem'], ['How it works', '#how-it-works'], ['Platform', '#platform'], ['Demo', '#demo'], ['Contact', '#contact']].map(([label, href]) => (
+              {[['Problem', '#problem'], ['How it works', '#how-it-works'], ['Demo', '#demo'], ['Contact', '#contact']].map(([label, href]) => (
                 <a key={href} href={href} onClick={closeMenu} className="flex min-h-11 items-center border-b border-border text-sm font-medium">{label}</a>
               ))}
+              <Link to="/technology" onClick={closeMenu} className="flex min-h-11 items-center border-b border-border text-sm font-medium">Technology</Link>
               <DemoButton className="mt-3 w-full" />
             </div>
           </nav>
