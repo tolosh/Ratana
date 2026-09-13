@@ -1,6 +1,6 @@
-# Lantern MVP roadmap
+# Rātana MVP roadmap
 
-- [x] Apply Lantern design tokens, typography, clinical signals and themes
+- [x] Apply Rātana design tokens, typography, clinical signals and themes
 - [x] Build the shared clinician shell and role switcher
 - [x] Build network command and clinical queue
 - [x] Build patient, alert, escalation and emergency handover flows
