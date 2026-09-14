@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import {
-  Activity, AlertTriangle, Ambulance, BarChart3, Bell, ChevronLeft, ChevronRight,
+  AlertTriangle, Ambulance, BarChart3, Bell, ChevronLeft, ChevronRight,
   ClipboardCheck, Clock3, FileClock, HeartPulse, Home, ListFilter,
   Map, Menu, Network, Pause, Play, RotateCcw, Search, Settings2, ShieldCheck,
   Smartphone, Stethoscope, Users, X, Check, Radio, Thermometer, Wind,
@@ -25,7 +25,7 @@ const navigation: Array<{id:View;label:string;icon:typeof Home;section?:string}>
   {id:"handover",label:"Escalation",icon:Ambulance},
   {id:"admission",label:"Admission & discharge",icon:FileClock,section:"Care operations"},
   {id:"patientapp",label:"Patient app",icon:Smartphone},
-  {id:"observation",label:"Observation capture",icon:Activity},
+  
   {id:"scenarios",label:"Scenario control",icon:Play},
   {id:"governance",label:"Governance",icon:ShieldCheck},
   {id:"users",label:"Users & access",icon:Users},
