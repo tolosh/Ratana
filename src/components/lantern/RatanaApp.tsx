@@ -21,7 +21,6 @@ const navigation: Array<{id:View;label:string;icon:typeof Home;section?:string}>
   {id:"network",label:"Network command",icon:Network},
   {id:"queue",label:"Clinical queue",icon:ClipboardCheck},
   {id:"crm",label:"Patient records",icon:Users},
-  {id:"patient",label:"Patient record",icon:HeartPulse},
   {id:"alert",label:"Alert review",icon:Bell},
   {id:"handover",label:"Escalation",icon:Ambulance},
   {id:"admission",label:"Admission & discharge",icon:FileClock,section:"Care operations"},
@@ -96,8 +95,8 @@ function RatanaConsole() {
 
 function Brand(){return <div className="flex items-center gap-2.5"><svg className="size-7 shrink-0 text-primary" viewBox="0 0 40 40" aria-hidden="true" fill="none"><path d="M6 35V17.5C6 9.9 12.3 4 20 4s14 5.9 14 13.5V35" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/><path d="M13 35V19.5a7 7 0 0 1 14 0V35" stroke="currentColor" strokeWidth="1.4" opacity=".45" strokeLinecap="round"/><circle cx="20" cy="21" r="3.6" fill="currentColor"/><path d="M20 4V1" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"/></svg><span className="font-display text-xl font-semibold text-night dark:text-foreground">Rātana</span></div>}
 
-function Nav({view,onView}:{view:View;onView:(v:View)=>void}){return <nav aria-label="Main navigation" className="space-y-0.5">
-  {navigation.map((item,i)=>{const Icon=item.icon;return <div key={item.id}>{item.section&&<div className={cn("mb-1 mt-4 px-3 text-[11px] font-semibold uppercase text-muted-foreground",i===0&&"mt-0")}>{item.section}</div>}<Button variant="ghost" onClick={()=>onView(item.id)} className={cn("h-10 w-full justify-start px-3 font-normal",view===item.id&&"bg-sidebar-accent font-semibold text-primary")}><Icon className="size-4"/>{item.label}</Button></div>})}
+function Nav({view,onView}:{view:View;onView:(v:View)=>void}){const patientRecordActive=view==="crm"||view==="patient"||view==="alert"||view==="handover";return <nav aria-label="Main navigation" className="space-y-0.5">
+  {navigation.map((item,i)=>{const Icon=item.icon;const active=item.id==="crm"?patientRecordActive:view===item.id;return <div key={item.id}>{item.section&&<div className={cn("mb-1 mt-4 px-3 text-[11px] font-semibold uppercase text-muted-foreground",i===0&&"mt-0")}>{item.section}</div>}<Button variant="ghost" onClick={()=>onView(item.id)} className={cn("h-10 w-full justify-start px-3 font-normal",active&&"bg-sidebar-accent font-semibold text-primary")}><Icon className="size-4"/>{item.label}</Button></div>})}
 </nav>}
 
 function PageHead({eyebrow,title,summary,actions}:{eyebrow:string;title:string;summary:string;actions?:React.ReactNode}){return <div className="flex flex-col gap-4 border-b border-border bg-card px-5 py-5 sm:flex-row sm:items-end sm:justify-between lg:px-8"><div><div className="mb-1 text-[11px] font-semibold uppercase text-primary">{eyebrow}</div><h1 className="font-display text-3xl font-semibold leading-tight">{title}</h1><p className="mt-1 max-w-3xl text-sm text-muted-foreground">{summary}</p></div>{actions&&<div className="flex shrink-0 gap-2">{actions}</div>}</div>}
