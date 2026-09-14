@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import {
   Activity, AlertTriangle, Ambulance, BarChart3, Bell, ChevronLeft, ChevronRight,
-  ClipboardCheck, Clock3, FileClock, Home, ListFilter,
+  ClipboardCheck, Clock3, FileClock, HeartPulse, Home, ListFilter,
   Map, Menu, Network, Pause, Play, RotateCcw, Search, Settings2, ShieldCheck,
   Smartphone, Stethoscope, Users, X, Check, Radio, Thermometer, Wind,
 } from "lucide-react";
