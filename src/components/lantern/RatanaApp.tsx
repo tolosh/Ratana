@@ -26,7 +26,7 @@ const navigation: Array<{id:View;label:string;icon:typeof Home;section?:string}>
   {id:"admission",label:"Admission & discharge",icon:FileClock,section:"Care operations"},
   {id:"patientapp",label:"Patient app",icon:Smartphone},
   {id:"observation",label:"Observation capture",icon:Activity},
-  {id:"scenarios",label:"Scenario control",icon:Play,section:"Prototype"},
+  {id:"scenarios",label:"Scenario control",icon:Play},
   {id:"governance",label:"Governance",icon:ShieldCheck},
   {id:"users",label:"Users & access",icon:Users},
   {id:"emergency",label:"Emergency portal",icon:Ambulance},
