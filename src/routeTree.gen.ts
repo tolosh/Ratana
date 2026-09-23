@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as DemoRouteImport } from './routes/demo'
 import { Route as ResearchRouteImport } from './routes/research'
 import { Route as TechnologyRouteImport } from './routes/technology'
+import { Route as ApiScribeChunkRouteImport } from './routes/api/scribe/chunk'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,18 +35,25 @@ const TechnologyRoute = TechnologyRouteImport.update({
   path: '/technology',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiScribeChunkRoute = ApiScribeChunkRouteImport.update({
+  id: '/api/scribe/chunk',
+  path: '/api/scribe/chunk',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/demo': typeof DemoRoute
   '/research': typeof ResearchRoute
   '/technology': typeof TechnologyRoute
+  '/api/scribe/chunk': typeof ApiScribeChunkRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/demo': typeof DemoRoute
   '/research': typeof ResearchRoute
   '/technology': typeof TechnologyRoute
+  '/api/scribe/chunk': typeof ApiScribeChunkRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +61,20 @@ export interface FileRoutesById {
   '/demo': typeof DemoRoute
   '/research': typeof ResearchRoute
   '/technology': typeof TechnologyRoute
+  '/api/scribe/chunk': typeof ApiScribeChunkRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/demo' | '/research' | '/technology'
+  fullPaths: '/' | '/demo' | '/research' | '/technology' | '/api/scribe/chunk'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/demo' | '/research' | '/technology'
-  id: '__root__' | '/' | '/demo' | '/research' | '/technology'
+  to: '/' | '/demo' | '/research' | '/technology' | '/api/scribe/chunk'
+  id:
+    | '__root__'
+    | '/'
+    | '/demo'
+    | '/research'
+    | '/technology'
+    | '/api/scribe/chunk'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,6 +82,7 @@ export interface RootRouteChildren {
   DemoRoute: typeof DemoRoute
   ResearchRoute: typeof ResearchRoute
   TechnologyRoute: typeof TechnologyRoute
+  ApiScribeChunkRoute: typeof ApiScribeChunkRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -99,6 +115,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TechnologyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/scribe/chunk': {
+      id: '/api/scribe/chunk'
+      path: '/api/scribe/chunk'
+      fullPath: '/api/scribe/chunk'
+      preLoaderRoute: typeof ApiScribeChunkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -107,6 +130,7 @@ const rootRouteChildren: RootRouteChildren = {
   DemoRoute: DemoRoute,
   ResearchRoute: ResearchRoute,
   TechnologyRoute: TechnologyRoute,
+  ApiScribeChunkRoute: ApiScribeChunkRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
