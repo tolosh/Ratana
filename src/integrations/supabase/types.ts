@@ -14,6 +14,77 @@ export type Database = {
   }
   public: {
     Tables: {
+      audit_events: {
+        Row: {
+          action: string
+          actor_id: string | null
+          at: string
+          detail: Json
+          entity_id: string | null
+          entity_type: string
+          id: string
+          organisation_id: string | null
+        }
+        Insert: {
+          action: string
+          actor_id?: string | null
+          at?: string
+          detail?: Json
+          entity_id?: string | null
+          entity_type: string
+          id?: string
+          organisation_id?: string | null
+        }
+        Update: {
+          action?: string
+          actor_id?: string | null
+          at?: string
+          detail?: Json
+          entity_id?: string | null
+          entity_type?: string
+          id?: string
+          organisation_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "audit_events_organisation_id_fkey"
+            columns: ["organisation_id"]
+            isOneToOne: false
+            referencedRelation: "organisations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      clinicians: {
+        Row: {
+          created_at: string
+          full_name: string
+          profession: string
+          registration_body: string
+          registration_number: string
+          user_id: string
+          verification_status: string
+        }
+        Insert: {
+          created_at?: string
+          full_name: string
+          profession: string
+          registration_body: string
+          registration_number: string
+          user_id: string
+          verification_status?: string
+        }
+        Update: {
+          created_at?: string
+          full_name?: string
+          profession?: string
+          registration_body?: string
+          registration_number?: string
+          user_id?: string
+          verification_status?: string
+        }
+        Relationships: []
+      }
       lantern_enquiries: {
         Row: {
           created_at: string
@@ -310,11 +381,509 @@ export type Database = {
           },
         ]
       }
+      memberships: {
+        Row: {
+          created_at: string
+          id: string
+          organisation_id: string
+          role: string
+          status: string
+          supervisor_id: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          organisation_id: string
+          role: string
+          status?: string
+          supervisor_id?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          organisation_id?: string
+          role?: string
+          status?: string
+          supervisor_id?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "memberships_organisation_id_fkey"
+            columns: ["organisation_id"]
+            isOneToOne: false
+            referencedRelation: "organisations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      org_modules: {
+        Row: {
+          enabled: boolean
+          module: string
+          organisation_id: string
+        }
+        Insert: {
+          enabled?: boolean
+          module: string
+          organisation_id: string
+        }
+        Update: {
+          enabled?: boolean
+          module?: string
+          organisation_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "org_modules_organisation_id_fkey"
+            columns: ["organisation_id"]
+            isOneToOne: false
+            referencedRelation: "organisations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      organisations: {
+        Row: {
+          audio_retention: string
+          country: string
+          created_at: string
+          created_by: string | null
+          id: string
+          name: string
+          parent_id: string | null
+          plan: string
+          type: string
+          updated_at: string
+        }
+        Insert: {
+          audio_retention?: string
+          country?: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          name: string
+          parent_id?: string | null
+          plan?: string
+          type?: string
+          updated_at?: string
+        }
+        Update: {
+          audio_retention?: string
+          country?: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          name?: string
+          parent_id?: string | null
+          plan?: string
+          type?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "organisations_parent_id_fkey"
+            columns: ["parent_id"]
+            isOneToOne: false
+            referencedRelation: "organisations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      scribe_addenda: {
+        Row: {
+          author_id: string
+          author_name: string
+          created_at: string
+          id: string
+          note_id: string
+          organisation_id: string
+          text: string
+        }
+        Insert: {
+          author_id: string
+          author_name: string
+          created_at?: string
+          id?: string
+          note_id: string
+          organisation_id: string
+          text: string
+        }
+        Update: {
+          author_id?: string
+          author_name?: string
+          created_at?: string
+          id?: string
+          note_id?: string
+          organisation_id?: string
+          text?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "scribe_addenda_note_id_fkey"
+            columns: ["note_id"]
+            isOneToOne: false
+            referencedRelation: "scribe_notes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "scribe_addenda_organisation_id_fkey"
+            columns: ["organisation_id"]
+            isOneToOne: false
+            referencedRelation: "organisations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      scribe_audio_chunks: {
+        Row: {
+          bytes: number
+          deleted_at: string | null
+          id: string
+          organisation_id: string
+          seq: number
+          session_id: string
+          storage_path: string | null
+          uploaded_at: string
+        }
+        Insert: {
+          bytes?: number
+          deleted_at?: string | null
+          id?: string
+          organisation_id: string
+          seq: number
+          session_id: string
+          storage_path?: string | null
+          uploaded_at?: string
+        }
+        Update: {
+          bytes?: number
+          deleted_at?: string | null
+          id?: string
+          organisation_id?: string
+          seq?: number
+          session_id?: string
+          storage_path?: string | null
+          uploaded_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "scribe_audio_chunks_organisation_id_fkey"
+            columns: ["organisation_id"]
+            isOneToOne: false
+            referencedRelation: "organisations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "scribe_audio_chunks_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "scribe_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      scribe_consents: {
+        Row: {
+          captured_at: string
+          captured_by: string
+          id: string
+          organisation_id: string
+          script_text: string
+          script_version: string
+          session_id: string
+        }
+        Insert: {
+          captured_at?: string
+          captured_by: string
+          id?: string
+          organisation_id: string
+          script_text: string
+          script_version: string
+          session_id: string
+        }
+        Update: {
+          captured_at?: string
+          captured_by?: string
+          id?: string
+          organisation_id?: string
+          script_text?: string
+          script_version?: string
+          session_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "scribe_consents_organisation_id_fkey"
+            columns: ["organisation_id"]
+            isOneToOne: false
+            referencedRelation: "organisations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "scribe_consents_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: true
+            referencedRelation: "scribe_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      scribe_notes: {
+        Row: {
+          consent_statement: string | null
+          created_at: string
+          generated_at: string | null
+          id: string
+          model: string | null
+          organisation_id: string
+          session_id: string
+          signed_at: string | null
+          signed_by: string | null
+          signed_name: string | null
+          status: string
+          template_id: string
+        }
+        Insert: {
+          consent_statement?: string | null
+          created_at?: string
+          generated_at?: string | null
+          id?: string
+          model?: string | null
+          organisation_id: string
+          session_id: string
+          signed_at?: string | null
+          signed_by?: string | null
+          signed_name?: string | null
+          status?: string
+          template_id: string
+        }
+        Update: {
+          consent_statement?: string | null
+          created_at?: string
+          generated_at?: string | null
+          id?: string
+          model?: string | null
+          organisation_id?: string
+          session_id?: string
+          signed_at?: string | null
+          signed_by?: string | null
+          signed_name?: string | null
+          status?: string
+          template_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "scribe_notes_organisation_id_fkey"
+            columns: ["organisation_id"]
+            isOneToOne: false
+            referencedRelation: "organisations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "scribe_notes_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: true
+            referencedRelation: "scribe_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      scribe_segments: {
+        Row: {
+          created_at: string
+          id: string
+          kind: string
+          organisation_id: string
+          seq: number
+          session_id: string
+          speaker: string
+          t_end: number
+          t_start: number
+          text: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          kind?: string
+          organisation_id: string
+          seq: number
+          session_id: string
+          speaker?: string
+          t_end?: number
+          t_start?: number
+          text?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          kind?: string
+          organisation_id?: string
+          seq?: number
+          session_id?: string
+          speaker?: string
+          t_end?: number
+          t_start?: number
+          text?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "scribe_segments_organisation_id_fkey"
+            columns: ["organisation_id"]
+            isOneToOne: false
+            referencedRelation: "organisations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "scribe_segments_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "scribe_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      scribe_sentences: {
+        Row: {
+          deleted: boolean
+          flag_reason: string | null
+          flagged: boolean
+          id: string
+          note_id: string
+          organisation_id: string
+          origin: string
+          position: number
+          resolution: string | null
+          section: string
+          section_order: number
+          source_seqs: number[]
+          text: string
+          updated_at: string
+        }
+        Insert: {
+          deleted?: boolean
+          flag_reason?: string | null
+          flagged?: boolean
+          id?: string
+          note_id: string
+          organisation_id: string
+          origin?: string
+          position: number
+          resolution?: string | null
+          section: string
+          section_order: number
+          source_seqs?: number[]
+          text: string
+          updated_at?: string
+        }
+        Update: {
+          deleted?: boolean
+          flag_reason?: string | null
+          flagged?: boolean
+          id?: string
+          note_id?: string
+          organisation_id?: string
+          origin?: string
+          position?: number
+          resolution?: string | null
+          section?: string
+          section_order?: number
+          source_seqs?: number[]
+          text?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "scribe_sentences_note_id_fkey"
+            columns: ["note_id"]
+            isOneToOne: false
+            referencedRelation: "scribe_notes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "scribe_sentences_organisation_id_fkey"
+            columns: ["organisation_id"]
+            isOneToOne: false
+            referencedRelation: "organisations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      scribe_sessions: {
+        Row: {
+          clinician_id: string
+          context: string
+          created_at: string
+          ended_at: string | null
+          episode_id: string | null
+          id: string
+          organisation_id: string
+          patient_id: string | null
+          patient_label: string
+          started_at: string | null
+          status: string
+          template_id: string
+          updated_at: string
+        }
+        Insert: {
+          clinician_id: string
+          context?: string
+          created_at?: string
+          ended_at?: string | null
+          episode_id?: string | null
+          id?: string
+          organisation_id: string
+          patient_id?: string | null
+          patient_label: string
+          started_at?: string | null
+          status?: string
+          template_id?: string
+          updated_at?: string
+        }
+        Update: {
+          clinician_id?: string
+          context?: string
+          created_at?: string
+          ended_at?: string | null
+          episode_id?: string | null
+          id?: string
+          organisation_id?: string
+          patient_id?: string | null
+          patient_label?: string
+          started_at?: string | null
+          status?: string
+          template_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "scribe_sessions_organisation_id_fkey"
+            columns: ["organisation_id"]
+            isOneToOne: false
+            referencedRelation: "organisations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
+      create_solo_organisation: {
+        Args: {
+          _country: string
+          _full_name: string
+          _profession: string
+          _registration_body: string
+          _registration_number: string
+        }
+        Returns: string
+      }
+      is_clinical_member: { Args: { _org: string }; Returns: boolean }
+      is_org_admin: { Args: { _org: string }; Returns: boolean }
+      is_org_member: { Args: { _org: string }; Returns: boolean }
       lantern_admission_worklist: {
         Args: never
         Returns: {
