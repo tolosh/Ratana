@@ -16,6 +16,9 @@ import { Route as DemoRouteImport } from './routes/demo'
 import { Route as ResearchRouteImport } from './routes/research'
 import { Route as TechnologyRouteImport } from './routes/technology'
 import { Route as AuthenticatedAppRouteRouteImport } from './routes/_authenticated/app/route'
+import { Route as AuthenticatedAppIndexRouteImport } from './routes/_authenticated/app/index'
+import { Route as AuthenticatedAppNewRouteImport } from './routes/_authenticated/app/new'
+import { Route as AuthenticatedAppSecurityRouteImport } from './routes/_authenticated/app/security'
 import { Route as ApiScribeChunkRouteImport } from './routes/api/scribe/chunk'
 
 const IndexRoute = IndexRouteImport.update({
@@ -52,6 +55,22 @@ const AuthenticatedAppRouteRoute = AuthenticatedAppRouteRouteImport.update({
   path: '/app',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedAppIndexRoute = AuthenticatedAppIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedAppRouteRoute,
+} as any)
+const AuthenticatedAppNewRoute = AuthenticatedAppNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => AuthenticatedAppRouteRoute,
+} as any)
+const AuthenticatedAppSecurityRoute =
+  AuthenticatedAppSecurityRouteImport.update({
+    id: '/security',
+    path: '/security',
+    getParentRoute: () => AuthenticatedAppRouteRoute,
+  } as any)
 const ApiScribeChunkRoute = ApiScribeChunkRouteImport.update({
   id: '/api/scribe/chunk',
   path: '/api/scribe/chunk',
@@ -64,8 +83,11 @@ export interface FileRoutesByFullPath {
   '/demo': typeof DemoRoute
   '/research': typeof ResearchRoute
   '/technology': typeof TechnologyRoute
-  '/app': typeof AuthenticatedAppRouteRoute
+  '/app': typeof AuthenticatedAppRouteRouteWithChildren
+  '/app/new': typeof AuthenticatedAppNewRoute
+  '/app/security': typeof AuthenticatedAppSecurityRoute
   '/api/scribe/chunk': typeof ApiScribeChunkRoute
+  '/app/': typeof AuthenticatedAppIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -73,8 +95,10 @@ export interface FileRoutesByTo {
   '/demo': typeof DemoRoute
   '/research': typeof ResearchRoute
   '/technology': typeof TechnologyRoute
-  '/app': typeof AuthenticatedAppRouteRoute
+  '/app/new': typeof AuthenticatedAppNewRoute
+  '/app/security': typeof AuthenticatedAppSecurityRoute
   '/api/scribe/chunk': typeof ApiScribeChunkRoute
+  '/app': typeof AuthenticatedAppIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -84,8 +108,11 @@ export interface FileRoutesById {
   '/demo': typeof DemoRoute
   '/research': typeof ResearchRoute
   '/technology': typeof TechnologyRoute
-  '/_authenticated/app': typeof AuthenticatedAppRouteRoute
+  '/_authenticated/app': typeof AuthenticatedAppRouteRouteWithChildren
+  '/_authenticated/app/new': typeof AuthenticatedAppNewRoute
+  '/_authenticated/app/security': typeof AuthenticatedAppSecurityRoute
   '/api/scribe/chunk': typeof ApiScribeChunkRoute
+  '/_authenticated/app/': typeof AuthenticatedAppIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -96,7 +123,10 @@ export interface FileRouteTypes {
     | '/research'
     | '/technology'
     | '/app'
+    | '/app/new'
+    | '/app/security'
     | '/api/scribe/chunk'
+    | '/app/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -104,8 +134,10 @@ export interface FileRouteTypes {
     | '/demo'
     | '/research'
     | '/technology'
-    | '/app'
+    | '/app/new'
+    | '/app/security'
     | '/api/scribe/chunk'
+    | '/app'
   id:
     | '__root__'
     | '/'
@@ -115,7 +147,10 @@ export interface FileRouteTypes {
     | '/research'
     | '/technology'
     | '/_authenticated/app'
+    | '/_authenticated/app/new'
+    | '/_authenticated/app/security'
     | '/api/scribe/chunk'
+    | '/_authenticated/app/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -179,6 +214,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppRouteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/app/': {
+      id: '/_authenticated/app/'
+      path: '/'
+      fullPath: '/app/'
+      preLoaderRoute: typeof AuthenticatedAppIndexRouteImport
+      parentRoute: typeof AuthenticatedAppRouteRoute
+    }
+    '/_authenticated/app/new': {
+      id: '/_authenticated/app/new'
+      path: '/new'
+      fullPath: '/app/new'
+      preLoaderRoute: typeof AuthenticatedAppNewRouteImport
+      parentRoute: typeof AuthenticatedAppRouteRoute
+    }
+    '/_authenticated/app/security': {
+      id: '/_authenticated/app/security'
+      path: '/security'
+      fullPath: '/app/security'
+      preLoaderRoute: typeof AuthenticatedAppSecurityRouteImport
+      parentRoute: typeof AuthenticatedAppRouteRoute
+    }
     '/api/scribe/chunk': {
       id: '/api/scribe/chunk'
       path: '/api/scribe/chunk'
@@ -189,12 +245,29 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AuthenticatedAppRouteRouteChildren {
+  AuthenticatedAppNewRoute: typeof AuthenticatedAppNewRoute
+  AuthenticatedAppSecurityRoute: typeof AuthenticatedAppSecurityRoute
+  AuthenticatedAppIndexRoute: typeof AuthenticatedAppIndexRoute
+}
+
+const AuthenticatedAppRouteRouteChildren: AuthenticatedAppRouteRouteChildren = {
+  AuthenticatedAppNewRoute: AuthenticatedAppNewRoute,
+  AuthenticatedAppSecurityRoute: AuthenticatedAppSecurityRoute,
+  AuthenticatedAppIndexRoute: AuthenticatedAppIndexRoute,
+}
+
+const AuthenticatedAppRouteRouteWithChildren =
+  AuthenticatedAppRouteRoute._addFileChildren(
+    AuthenticatedAppRouteRouteChildren,
+  )
+
 interface AuthenticatedRouteRouteChildren {
-  AuthenticatedAppRouteRoute: typeof AuthenticatedAppRouteRoute
+  AuthenticatedAppRouteRoute: typeof AuthenticatedAppRouteRouteWithChildren
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedAppRouteRoute: AuthenticatedAppRouteRoute,
+  AuthenticatedAppRouteRoute: AuthenticatedAppRouteRouteWithChildren,
 }
 
 const AuthenticatedRouteRouteWithChildren =
