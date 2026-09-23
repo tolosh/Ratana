@@ -10,14 +10,26 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as DemoRouteImport } from './routes/demo'
 import { Route as ResearchRouteImport } from './routes/research'
 import { Route as TechnologyRouteImport } from './routes/technology'
+import { Route as AuthenticatedAppRouteRouteImport } from './routes/_authenticated/app/route'
 import { Route as ApiScribeChunkRouteImport } from './routes/api/scribe/chunk'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DemoRoute = DemoRouteImport.update({
@@ -35,6 +47,11 @@ const TechnologyRoute = TechnologyRouteImport.update({
   path: '/technology',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAppRouteRoute = AuthenticatedAppRouteRouteImport.update({
+  id: '/app',
+  path: '/app',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const ApiScribeChunkRoute = ApiScribeChunkRouteImport.update({
   id: '/api/scribe/chunk',
   path: '/api/scribe/chunk',
@@ -43,42 +60,68 @@ const ApiScribeChunkRoute = ApiScribeChunkRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/demo': typeof DemoRoute
   '/research': typeof ResearchRoute
   '/technology': typeof TechnologyRoute
+  '/app': typeof AuthenticatedAppRouteRoute
   '/api/scribe/chunk': typeof ApiScribeChunkRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/demo': typeof DemoRoute
   '/research': typeof ResearchRoute
   '/technology': typeof TechnologyRoute
+  '/app': typeof AuthenticatedAppRouteRoute
   '/api/scribe/chunk': typeof ApiScribeChunkRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
   '/demo': typeof DemoRoute
   '/research': typeof ResearchRoute
   '/technology': typeof TechnologyRoute
+  '/_authenticated/app': typeof AuthenticatedAppRouteRoute
   '/api/scribe/chunk': typeof ApiScribeChunkRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/demo' | '/research' | '/technology' | '/api/scribe/chunk'
-  fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/demo' | '/research' | '/technology' | '/api/scribe/chunk'
-  id:
-    | '__root__'
+  fullPaths:
     | '/'
+    | '/auth'
     | '/demo'
     | '/research'
     | '/technology'
+    | '/app'
+    | '/api/scribe/chunk'
+  fileRoutesByTo: FileRoutesByTo
+  to:
+    | '/'
+    | '/auth'
+    | '/demo'
+    | '/research'
+    | '/technology'
+    | '/app'
+    | '/api/scribe/chunk'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/demo'
+    | '/research'
+    | '/technology'
+    | '/_authenticated/app'
     | '/api/scribe/chunk'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
   DemoRoute: typeof DemoRoute
   ResearchRoute: typeof ResearchRoute
   TechnologyRoute: typeof TechnologyRoute
@@ -92,6 +135,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/demo': {
@@ -115,6 +172,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TechnologyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/app': {
+      id: '/_authenticated/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AuthenticatedAppRouteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/api/scribe/chunk': {
       id: '/api/scribe/chunk'
       path: '/api/scribe/chunk'
@@ -125,8 +189,21 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAppRouteRoute: typeof AuthenticatedAppRouteRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAppRouteRoute: AuthenticatedAppRouteRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
   DemoRoute: DemoRoute,
   ResearchRoute: ResearchRoute,
   TechnologyRoute: TechnologyRoute,
