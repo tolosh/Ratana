@@ -114,6 +114,7 @@ export function RatanaHome() {
             <Link to="/technology" className="text-sm font-medium hover:text-primary">Technology</Link>
             <a href="#demo" className="text-sm font-medium hover:text-primary">Demo</a>
             <a href="#contact" className="text-sm font-medium hover:text-primary">Contact</a>
+            <Link to="/auth" className="text-sm font-medium hover:text-primary">Scribe sign in</Link>
             <DemoButton />
           </nav>
           <Button variant="ghost" size="icon" className="ml-auto lg:hidden" onClick={() => setMenuOpen((open) => !open)} aria-label={menuOpen ? "Close navigation" : "Open navigation"} aria-expanded={menuOpen}>
