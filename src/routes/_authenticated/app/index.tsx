@@ -29,7 +29,7 @@ function SessionsPage() {
     <>
       <ScribeHead eyebrow="Scribe" title="Sessions" summary="Every note is drafted from the recording and filed only after you sign it." actions={<Button asChild><Link to="/app/new"><Mic />New session</Link></Button>} />
       <div className="p-5 lg:p-8">
-        {account && !account.hasFactor && (
+        {false && (
           <div className="mb-4 flex flex-wrap items-center gap-3 rounded-card border border-border bg-muted px-4 py-3 text-sm">
             <span><strong>Set up multi-factor authentication</strong> before recording patient audio.</span>
             <Button asChild size="sm" variant="outline" className="ml-auto"><Link to="/app/security">Set up now</Link></Button>

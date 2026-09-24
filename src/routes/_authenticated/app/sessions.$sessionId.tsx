@@ -127,8 +127,8 @@ function ReviewPage() {
         summary={`${STATUS_LABELS[session.status]} · started ${clock(session.started_at)} · ended ${clock(session.ended_at)}`}
         actions={note && !signed ? (
           <div className="flex flex-col items-end gap-1">
-            <Button onClick={runSign} disabled={openFlags > 0 || liveCount === 0 || account?.aal !== "aal2"}><Lock />Sign note</Button>
-            <span className="font-mono text-xs tabular-nums text-muted-foreground">{openFlags ? `${openFlags} flag${openFlags === 1 ? "" : "s"} to resolve` : account?.aal !== "aal2" ? "Verify MFA to sign" : "Ready to sign"}</span>
+            <Button onClick={runSign} disabled={openFlags > 0 || liveCount === 0}><Lock />Sign note</Button>
+            <span className="font-mono text-xs tabular-nums text-muted-foreground">{openFlags ? `${openFlags} flag${openFlags === 1 ? "" : "s"} to resolve` : "Ready to sign"}</span>
           </div>
         ) : undefined}
       />

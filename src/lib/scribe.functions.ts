@@ -47,7 +47,6 @@ export const captureConsent = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => z.object({ sessionId: z.string().uuid() }).parse(d))
   .handler(async ({ data, context }) => {
     const ctx = context as unknown as Ctx;
-    if (ctx.claims["aal"] !== "aal2") throw new Error("Multi-factor authentication is required before recording.");
     const s = await loadSession(ctx, data.sessionId);
     const { error } = await ctx.supabase.from("scribe_consents").insert({ session_id: s.id, organisation_id: s.organisation_id, script_version: CONSENT_SCRIPT_VERSION, script_text: CONSENT_SCRIPT, captured_by: ctx.userId });
     if (error && !String(error.message).includes("duplicate")) throw new Error("Consent could not be recorded");
@@ -208,7 +207,6 @@ export const signNote = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => z.object({ noteId: z.string().uuid() }).parse(d))
   .handler(async ({ data, context }) => {
     const ctx = context as unknown as Ctx;
-    if (ctx.claims["aal"] !== "aal2") throw new Error("Multi-factor authentication is required to sign.");
     const { data: note } = await ctx.supabase.from("scribe_notes").select("id,organisation_id,session_id,status").eq("id", data.noteId).maybeSingle();
     if (!note) throw new Error("Note not found");
     if (note.status === "signed") throw new Error("Already signed");
