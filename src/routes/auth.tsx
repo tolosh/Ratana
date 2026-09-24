@@ -31,6 +31,8 @@ function AuthPage() {
 
   useEffect(() => {
     if (new URLSearchParams(window.location.search).get("mode") === "signup") setMode("signup");
+    const linkErr = new URLSearchParams(window.location.hash.replace(/^#/, "")).get("error_code") ?? new URLSearchParams(window.location.search).get("error_code");
+    if (linkErr) setError(linkErr === "otp_expired" ? "That confirmation link has expired or was already used. If your email is confirmed, sign in below; otherwise create the account again to get a new link." : "That link could not be used. Please sign in or request a new link.");
     supabase.auth.getSession().then(({ data }) => { if (data.session) navigate({ to: "/app" }); });
     const { data: sub } = supabase.auth.onAuthStateChange((event, session) => { if (event === "SIGNED_IN" && session) navigate({ to: "/app" }); });
     return () => sub.subscription.unsubscribe();

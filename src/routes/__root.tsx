@@ -121,6 +121,18 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
+  // Email confirmation links can land on any page (often the home page).
+  // Forward any sign-in tokens or link errors to the sign-in page, which finishes sign-in and opens the account.
+  useEffect(() => {
+    const { pathname, search, hash } = window.location;
+    if (pathname === "/auth") return;
+    const h = new URLSearchParams(hash.replace(/^#/, ""));
+    const q = new URLSearchParams(search);
+    if (h.has("access_token") || h.has("error_code") || q.has("code") || q.has("error_code")) {
+      window.location.replace(`/auth${search}${hash}`);
+    }
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
