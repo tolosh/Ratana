@@ -35,7 +35,7 @@ function SecurityPage() {
     for (const f of existing?.all ?? []) if (f.status !== "verified") await supabase.auth.mfa.unenroll({ factorId: f.id });
     const { data, error } = await supabase.auth.mfa.enroll({ factorType: "totp", friendlyName: `Rātana ${new Date().toISOString().slice(0, 10)}` });
     setBusy(false);
-    if (error || !data) { setError("Authenticator set-up could not start. Try again."); return; }
+    if (error || !data) { setError(`Authenticator set-up could not start. ${error?.message ?? ""}`.trim()); return; }
     setEnroll({ factorId: data.id, qr: data.totp.qr_code, secret: data.totp.secret });
   }
 
