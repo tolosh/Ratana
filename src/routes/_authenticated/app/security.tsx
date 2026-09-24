@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/_authenticated/app/security")({
-  head: () => ({ meta: [{ title: "Security and plan · Rātana Scribe" }, { name: "description", content: "Multi-factor authentication, plan and retention." }, { property: "og:title", content: "Security and plan · Rātana Scribe" }, { property: "og:description", content: "Multi-factor authentication, plan and retention." }] }),
+  head: () => ({ meta: [{ title: "Account and plan · Rātana Scribe" }, { name: "description", content: "Clinician details, plan and retention." }, { property: "og:title", content: "Account and plan · Rātana Scribe" }, { property: "og:description", content: "Clinician details, plan and retention." }] }),
   component: SecurityPage,
 });
 
@@ -56,32 +56,8 @@ function SecurityPage() {
 
   return (
     <>
-      <ScribeHead eyebrow="Account" title="Security and plan" summary="Multi-factor authentication is required before patient audio is captured and before notes are signed." />
+      <ScribeHead eyebrow="Account" title="Account and plan" summary="Your clinician details, plan and audio retention." />
       <div className="grid gap-5 p-5 lg:grid-cols-2 lg:p-8">
-        <section className="rounded-card border border-border bg-card p-5">
-          <h2 className="font-semibold">Multi-factor authentication</h2>
-          <p className="mt-1 text-sm">
-            Status: <strong>{verifiedNow ? "Verified for this sign-in" : account?.hasFactor ? "Set up · verify for this sign-in" : "Not set up"}</strong>
-          </p>
-          {!account?.hasFactor && !enroll && <Button className="mt-4" onClick={startEnroll} disabled={busy}>Set up authenticator app</Button>}
-          {enroll && (
-            <div className="mt-4 space-y-3">
-              <p className="text-sm">Scan with an authenticator app, then enter the 6-digit code.</p>
-              <img src={enroll.qr} alt="Authenticator set-up QR code" className="size-44 rounded-control border border-border bg-card p-2" />
-              <p className="text-xs text-muted-foreground">Or enter this key: <span className="break-all font-mono">{enroll.secret}</span></p>
-            </div>
-          )}
-          {(enroll || (account?.hasFactor && !verifiedNow)) && (
-            <form onSubmit={verify} className="mt-4 flex flex-wrap items-end gap-3">
-              <label className="text-sm font-medium">6-digit code
-                <input className={cn(fieldClass, "mt-1 w-40 font-mono tabular-nums")} inputMode="numeric" autoComplete="one-time-code" pattern="[0-9]{6}" required value={code} onChange={(e) => setCode(e.target.value)} />
-              </label>
-              <Button type="submit" disabled={busy}>Verify</Button>
-            </form>
-          )}
-          {error && <p role="alert" className="mt-3 text-sm text-destructive">{error}</p>}
-        </section>
-
         <section className="rounded-card border border-border bg-card p-5">
           <h2 className="font-semibold">Clinician</h2>
           {account?.clinician ? (

@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 const nav = [
   { to: "/app", label: "Sessions", icon: FileText },
   { to: "/app/new", label: "New session", icon: Mic },
-  { to: "/app/security", label: "Security and plan", icon: ShieldCheck },
+  { to: "/app/security", label: "Account and plan", icon: ShieldCheck },
 ] as const;
 
 export const fieldClass = "h-11 w-full rounded-control border border-input bg-card px-3 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";

@@ -34,7 +34,6 @@ export const Route = createFileRoute("/api/scribe/chunk")({
         const { data: claimData, error: claimErr } = await supabase.auth.getClaims(token);
         const claims = claimData?.claims as Record<string, unknown> | undefined;
         if (claimErr || !claims?.["sub"]) return json({ error: "Unauthorized" }, 401);
-        if (claims["aal"] !== "aal2") return json({ error: "Multi-factor authentication is required before audio is captured." }, 403);
 
         const form = await request.formData();
         const sessionId = String(form.get("sessionId") ?? "");

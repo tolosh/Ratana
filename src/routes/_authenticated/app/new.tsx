@@ -29,7 +29,7 @@ function NewSessionPage() {
   const create = useServerFn(createSession);
   const consent = useServerFn(captureConsent);
 
-  const mfaReady = account?.aal === "aal2";
+  const mfaReady = true;
   const canCapture = account?.membership && ["owner", "practice_owner", "clinician", "registrar", "assistant"].includes(account.membership.role);
 
   async function submitSetup(e: React.FormEvent) {

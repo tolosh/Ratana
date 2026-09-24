@@ -91,7 +91,7 @@ function AuthPage() {
             </button>
           </p>
         </section>
-        <p className="mt-4 text-xs text-muted-foreground">Multi-factor authentication is set up before any patient audio is captured.</p>
+        <p className="mt-4 text-xs text-muted-foreground">Confirm your email address to start recording.</p>
       </div>
     </main>
   );
