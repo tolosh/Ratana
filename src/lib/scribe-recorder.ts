@@ -53,7 +53,7 @@ function downsample(chunks: Float32Array[], from: number): Float32Array {
   const out = new Float32Array(Math.floor(total / ratio));
   for (let i = 0; i < out.length; i++) {
     const start = Math.floor(i * ratio), end = Math.min(total, Math.floor((i + 1) * ratio));
-    let sum = 0; for (let j = start; j < end; j++) sum += merged[j]; out[i] = sum / Math.max(1, end - start);
+    let sum = 0; for (let j = start; j < end; j++) sum += merged[j]!; out[i] = sum / Math.max(1, end - start);
   }
   return out;
 }
@@ -143,7 +143,7 @@ export class ChunkRecorder {
 
 /** Uploads pending chunks in order. Returns counts. Failures stay in IndexedDB for the next attempt. */
 let uploading = false;
-export async function flushUploads(sessionId?: string): Promise<{ uploaded: number; pending: number; error?: string }> {
+export async function flushUploads(sessionId?: string): Promise<{ uploaded: number; pending: number; error?: string | undefined }> {
   if (uploading) return { uploaded: 0, pending: (await pendingChunks(sessionId)).length };
   uploading = true;
   let uploaded = 0;

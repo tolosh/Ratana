@@ -33,7 +33,7 @@ export const TEMPLATES: TemplateDef[] = [
   },
 ];
 
-export const templateById = (id: string) => TEMPLATES.find((t) => t.id === id) ?? TEMPLATES[0];
+export const templateById = (id: string): TemplateDef => TEMPLATES.find((t) => t.id === id) ?? TEMPLATES[0]!;
 
 export const CONTEXT_LABELS: Record<string, string> = {
   in_person: "In person",

@@ -33,7 +33,7 @@ export const Route = createFileRoute("/api/scribe/chunk")({
         });
         const { data: claimData, error: claimErr } = await supabase.auth.getClaims(token);
         const claims = claimData?.claims as Record<string, unknown> | undefined;
-        if (claimErr || !claims?.sub) return json({ error: "Unauthorized" }, 401);
+        if (claimErr || !claims?.["sub"]) return json({ error: "Unauthorized" }, 401);
         if (claims["aal"] !== "aal2") return json({ error: "Multi-factor authentication is required before audio is captured." }, 403);
 
         const form = await request.formData();
@@ -82,7 +82,7 @@ export const Route = createFileRoute("/api/scribe/chunk")({
           { onConflict: "session_id,seq" },
         );
         if (seq === 0) {
-          await supabaseAdmin.from("audit_events").insert({ organisation_id: session.organisation_id, actor_id: String(claims.sub), action: "scribe.audio.capture_started", entity_type: "scribe_session", entity_id: sessionId, detail: {} });
+          await supabaseAdmin.from("audit_events").insert({ organisation_id: session.organisation_id, actor_id: String(claims["sub"]), action: "scribe.audio.capture_started", entity_type: "scribe_session", entity_id: sessionId, detail: {} });
         }
         return json({ ok: true, kind, text });
       },

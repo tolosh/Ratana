@@ -67,7 +67,7 @@ export function ScribeShell() {
   );
 }
 
-export function ScribeHead({ eyebrow, title, summary, actions }: { eyebrow: string; title: string; summary?: string; actions?: React.ReactNode }) {
+export function ScribeHead({ eyebrow, title, summary, actions }: { eyebrow: string; title: string; summary?: string | undefined; actions?: React.ReactNode }) {
   return (
     <div className="flex flex-col gap-4 border-b border-border bg-card px-5 py-5 sm:flex-row sm:items-end sm:justify-between lg:px-8">
       <div>
