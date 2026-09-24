@@ -20,6 +20,7 @@ import { Route as AuthenticatedAppIndexRouteImport } from './routes/_authenticat
 import { Route as AuthenticatedAppNewRouteImport } from './routes/_authenticated/app/new'
 import { Route as AuthenticatedAppSecurityRouteImport } from './routes/_authenticated/app/security'
 import { Route as ApiScribeChunkRouteImport } from './routes/api/scribe/chunk'
+import { Route as AuthenticatedAppSessionsSessionIdRouteImport } from './routes/_authenticated/app/sessions.$sessionId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -76,6 +77,12 @@ const ApiScribeChunkRoute = ApiScribeChunkRouteImport.update({
   path: '/api/scribe/chunk',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAppSessionsSessionIdRoute =
+  AuthenticatedAppSessionsSessionIdRouteImport.update({
+    id: '/sessions/$sessionId',
+    path: '/sessions/$sessionId',
+    getParentRoute: () => AuthenticatedAppRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -88,6 +95,7 @@ export interface FileRoutesByFullPath {
   '/app/security': typeof AuthenticatedAppSecurityRoute
   '/api/scribe/chunk': typeof ApiScribeChunkRoute
   '/app/': typeof AuthenticatedAppIndexRoute
+  '/app/sessions/$sessionId': typeof AuthenticatedAppSessionsSessionIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -99,6 +107,7 @@ export interface FileRoutesByTo {
   '/app/security': typeof AuthenticatedAppSecurityRoute
   '/api/scribe/chunk': typeof ApiScribeChunkRoute
   '/app': typeof AuthenticatedAppIndexRoute
+  '/app/sessions/$sessionId': typeof AuthenticatedAppSessionsSessionIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -113,6 +122,7 @@ export interface FileRoutesById {
   '/_authenticated/app/security': typeof AuthenticatedAppSecurityRoute
   '/api/scribe/chunk': typeof ApiScribeChunkRoute
   '/_authenticated/app/': typeof AuthenticatedAppIndexRoute
+  '/_authenticated/app/sessions/$sessionId': typeof AuthenticatedAppSessionsSessionIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -127,6 +137,7 @@ export interface FileRouteTypes {
     | '/app/security'
     | '/api/scribe/chunk'
     | '/app/'
+    | '/app/sessions/$sessionId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -138,6 +149,7 @@ export interface FileRouteTypes {
     | '/app/security'
     | '/api/scribe/chunk'
     | '/app'
+    | '/app/sessions/$sessionId'
   id:
     | '__root__'
     | '/'
@@ -151,6 +163,7 @@ export interface FileRouteTypes {
     | '/_authenticated/app/security'
     | '/api/scribe/chunk'
     | '/_authenticated/app/'
+    | '/_authenticated/app/sessions/$sessionId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -242,6 +255,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiScribeChunkRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/app/sessions/$sessionId': {
+      id: '/_authenticated/app/sessions/$sessionId'
+      path: '/sessions/$sessionId'
+      fullPath: '/app/sessions/$sessionId'
+      preLoaderRoute: typeof AuthenticatedAppSessionsSessionIdRouteImport
+      parentRoute: typeof AuthenticatedAppRouteRoute
+    }
   }
 }
 
@@ -249,12 +269,15 @@ interface AuthenticatedAppRouteRouteChildren {
   AuthenticatedAppNewRoute: typeof AuthenticatedAppNewRoute
   AuthenticatedAppSecurityRoute: typeof AuthenticatedAppSecurityRoute
   AuthenticatedAppIndexRoute: typeof AuthenticatedAppIndexRoute
+  AuthenticatedAppSessionsSessionIdRoute: typeof AuthenticatedAppSessionsSessionIdRoute
 }
 
 const AuthenticatedAppRouteRouteChildren: AuthenticatedAppRouteRouteChildren = {
   AuthenticatedAppNewRoute: AuthenticatedAppNewRoute,
   AuthenticatedAppSecurityRoute: AuthenticatedAppSecurityRoute,
   AuthenticatedAppIndexRoute: AuthenticatedAppIndexRoute,
+  AuthenticatedAppSessionsSessionIdRoute:
+    AuthenticatedAppSessionsSessionIdRoute,
 }
 
 const AuthenticatedAppRouteRouteWithChildren =

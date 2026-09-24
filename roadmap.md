@@ -32,3 +32,8 @@
 - [x] Clinical CRM patient model with full create, read, update and delete across identity, episodes, clinical detail, monitoring, care plan, notes, tasks, contacts, care team, communications, documents and audit
 - [x] Validate the CRM on desktop and mobile
 - [x] Dashboard and drill-down figures read live from the record set (72 pending admissions, 21 transfers, 425 device concerns now exist as records; worklists paginate and totals reconcile).
+- [x] Scribe M0: sign-in (email, Google), organisations, memberships, clinicians, audit trail, /app shell
+- [x] Scribe M1: solo sign-up, MFA gate, consent, 5 s chunk recording with offline buffer, transcript, drafted note with sources, verification flags, sign, lock, addenda, audio deletion on sign
+- [ ] Test card payments for plans (next)
+- [ ] Browser check of MFA → recording → sign with a confirmed account (blocked: test account email not confirmed)
+- [ ] M2–M5 per approved plan
